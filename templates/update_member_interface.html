@@ -20,7 +20,7 @@
 
 {% endfor %}
 <div class="memberupdate_manager">
-    <form action="/update_member_interface" method="POST">
+    <form action="/update_member_interface" method="POST" class="capital">
 
             {% for result_update in dbresult_update %}
             <div id="userid_input" class="input-group">
@@ -73,7 +73,9 @@
             </div>
             <div id="membership_type_input" class="input-group">
                 <span for = "membership_type_update" class="input-group-text">{{dbcols_update[11]}}: </span>
-                <input type = "text" id = "membership_type_update" name = "membership_type_update" class = "form-control"  required="required"  value={{result_update[11]}} maxlength="15"></input> 
+                <select name="membership_type_update" id="membership_type_update" class = "form-control capital"  required="required"  >
+                    <option value="{{result_update[11]}}" id="default_type"> {{result_update[11]}}</option>
+                </select>
             </div>
             <div id="user_type_input" class="input-group">
                 <span for = "user_type_update" class="input-group-text">{{dbcols_update[12]}}: </span>
@@ -101,3 +103,24 @@
 
 
 {% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+       var select = document.getElementById('membership_type_update');
+       var option = document.getElementById('default_type');
+       var list = ['weekly','monthly','yearly'];
+       test(option.textContent)
+       for (var i=0;i<list.length;i++){
+            if (list[i] != option){
+                var new_opt = document.createElement("option");
+                new_opt.innerHTML = list[i];
+                option.parentElement.appendChild(new_opt)
+
+            }
+       }
+       test()
+    </script>
+
+
+    {% endblock %}

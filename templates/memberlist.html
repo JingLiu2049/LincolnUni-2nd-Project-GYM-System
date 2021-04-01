@@ -50,8 +50,8 @@
                     <td>{{result[2]}}</td>
                     <td>{{result[3]}}</td>
                     <td>{{result[4]}}</td>
-                    <td>{{result[5]}}</td>
-                    <td>{{result[6]}}</td>
+                    <td class="capital">{{result[5]}}</td>
+                    <td class="capital">{{result[6]}}</td>
                     <td><a href="/update_member_interface?correspondingid={{result[0]}}"><button
                                 type="button">Update</button></a></td>
                     <td><a href="/delete_member_interface?correspondingid_d={{result[0]}}"><button type="button"
@@ -63,7 +63,15 @@
 
     </div>
 
-    {% block js %}
+    
+
+</div>
+
+
+
+{% endblock %}
+
+{% block js %}
     <script type="text/javascript">
 
         var btn = document.getElementById('deletemember')
@@ -78,9 +86,3 @@
 
 
     {% endblock %}
-
-</div>
-
-
-
-{% endblock %}
