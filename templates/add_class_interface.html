@@ -1,0 +1,129 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='add_class_interface.css')}}" />
+
+{% endblock %}
+
+{% block manager %}
+<h1>Add Class</h1>
+
+{% for message in get_flashed_messages() %}
+
+<div class=flash>{{ message }}</div>
+
+{% endfor %}
+
+<div class="editarea">
+    <form action = "/add_class_interface" method = "POST">
+
+        <div id="groupclassid" class="insertmodule">
+            <span for = "groupclassid" class="itemtitle">Group Class ID:</span>
+            <input type = "text" id = "groupclassid" name = "groupclassid" class = "insertbox" value={{groupclass_id[0]}} readonly /> 
+        </div>
+        
+        <div id="groupclassname" class="insertmodule">
+            <span for = "groupclassname" class="itemtitle">Group Class Name:</span>
+            <input type = "text" id = "groupclassname" name = "groupclassname" class = "insertbox" required="required" maxlength="30"/> 
+        </div>
+
+        <div id="classdatearea" class="insertmodule">
+            <span for = "classdatearea" class="itemtitle">Group Class Date:</span>
+            <input type="date" placeholder="dd/mm/yy" id="classdate" class = "insertbox" name="classdate" onchange="date()"/>
+        </div>
+
+        <div id="weekdaybox" class="insertmodule">
+            <span for = "weekdaybox" class="itemtitle">Group Class Day:</span>
+            <input type="text" id="weekoutput"  class = "insertbox" name="weekoutput" maxlength="20"/>
+        </div>
+
+        <script type="text/javascript">
+            function date() {
+                var input = document.getElementById("classdate").value;
+                var date = new Date(input).getUTCDay();
+                var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                document.getElementById('weekoutput').value = weekday[date];    //textContent
+            }
+        </script>
+
+        <div id="classstarttime" class="insertmodule">
+            <span for = "classstarttime" class="itemtitle">Class Start Time:</span>
+            <select id="classstarttime" name="classstarttime" class="insertbox">
+                <option value="08:00:00">8:00</option>
+                <option value="09:00:00">9:00</option>
+                <option value="10:00:00">10:00</option>
+                <option value="11:00:00">11:00</option> 
+                <option value="13:00:00">13:00</option> 
+                <option value="14:00:00">14:00</option>
+                <option value="15:00:00">15:00</option>
+                <option value="16:00:00">16:00</option> 
+            </select> 
+        </div>
+
+        <div id="classendtime" class="insertmodule">
+            <span for = "classendtime" class="itemtitle">Class End Time:</span>
+            <select id="classendtime" name="classendtime" class="insertbox">
+                <option value="09:00:00">9:00</option>
+                <option value="10:00:00">10:00</option>
+                <option value="11:00:00">11:00</option>
+                <option value="12:00:00">12:00</option> 
+                <option value="14:00:00">14:00</option> 
+                <option value="15:00:00">15:00</option>
+                <option value="16:00:00">16:00</option>
+                <option value="17:00:00">17:00</option> 
+            </select> 
+        </div>
+
+        <div id="maximumnumber" class="insertmodule">
+            <span for = "maximumnumber" class="itemtitle">Maximum Number:</span>
+            <input type = "text" id = "maximumnumber" name = "maximumnumber" class = "insertbox" required="required" /> 
+        </div>
+
+        <div id="location" class="insertmodule">
+            <span for = "location" class="itemtitle">Location:</span><br/>
+            <input type = "text" id = "location" name = "location" class = "insertbox" required="required" maxlength="20"/>
+        </div>
+
+        <div id="description" class="insertmodule">
+            <span for = "description" class="itemtitle">Description:</span>
+            <input type = "text" id = "description" name = "description" class = "insertbox" required="required" /> 
+        </div>
+        
+        <div id="trainerid" class="insertmodule">
+            <span for = "trainerid" class="itemtitle">Trainer Id:</span>
+            <select id = "trainerid" name = "trainerid" class = "insertbox" required="required" >
+            {% for item_trainer in select_trainer%}
+            <option value={{item_trainer[0]}}>{{item_trainer[1]}} {{item_trainer[2]}}</option>
+            {% endfor %} 
+            </select>
+        </div>
+        
+        <div class="button">
+            <div id = "submitdiv" class="controldiv">
+                <input type="submit" id="mySubmit" name="mySubmit" class="submitbutton"/>
+            </div>
+            <div id = "resetdiv" class="controldiv">
+                <input type="reset" id="myreset" class="resetbutton"/>
+            </div>
+            <div id = "returndiv" class="controldiv">
+                <a href="{{ url_for('public_class_manager') }}"><button id="returnlastpage" type="button" class="cancelbutton">Cancel</button></a>
+            </div>
+        </div>
+
+                
+
+
+    
+    </form>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+

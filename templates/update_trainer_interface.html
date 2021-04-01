@@ -1,0 +1,105 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='update_trainer_interface.css')}}" />
+
+{% endblock %}
+{% block search %}
+>
+
+{% endblock %}
+
+{% block manager %}
+<h1>Lincoln GYM--Trainer Update</h1>
+
+{% for message in get_flashed_messages() %}
+
+<div class=flash>{{ message }}</div>
+
+{% endfor %}
+<div class="trainerupdate_manager">
+    <form action="/update_trainer_interface" method="POST">
+
+            {% for result_update in dbresult_update %}
+            <div id="userid_input" class="insertmodule">
+                <span for = "userid_update" class="itemtitle">{{dbcols_update[0]}}: </span>
+                <input type = "text" id = "userid_update" name = "userid_update" class = "insertbox" value={{result_update[0]}} readonly></input>
+            </div>
+            <div id="first_name_input" class="insertmodule">
+                <span for = "first_name_update" class="itemtitle">{{dbcols_update[1]}}: </span>
+                <input type = "text" id = "first_name_update" name = "first_name_update" class = "insertbox" required="required"  value={{result_update[1]}} maxlength="30"></input>
+            </div>
+            <div id="last_name_input" class="insertmodule">
+                <span for = "last_name_update" class="itemtitle">{{dbcols_update[2]}}: </span>
+                <input type = "text" id = "last_name_update" name = "last_name_update" class = "insertbox" required="required"  value={{result_update[2]}} maxlength="30"></input>
+            </div> 
+            <div id="phone_number_input" class="insertmodule">
+                <span for = "phone_number_update" class="itemtitle">{{dbcols_update[3]}}: </span>
+                <input type = "text" id = "phone_number_update" name = "phone_number_update" class = "insertbox" required="required"  value={{result_update[3]}} maxlength="30"></input>
+            </div>
+
+            <div id="email_addressr_input" class="insertmodule">
+                <span for = "email_address_update" class="itemtitle">{{dbcols_update[4]}}: </span>
+                <input type = "text" id = "email_address_update" name = "email_address_update" class = "insertbox" required="required"  value={{result_update[4]}} maxlength="60"></input>
+            </div> 
+            <div id="address_input" class="insertmodule">
+                <span for = "address_update" class="itemtitle">{{dbcols_update[5]}}: </span>
+                <input type = "text" id = "address_update" name = "address_update" class = "insertbox" required="required"  value={{result_update[5]}} maxlength="60"></input> 
+            </div>  
+            <div id="birthday_input" class="insertmodule">
+                <span for = "birthday_update" class="itemtitle">{{dbcols_update[6]}}: </span>
+                <input type = "date" id = "birthday_update" name = "birthday_update" class = "insertbox" required="required"  value={{result_update[6]}}></input> 
+            </div>    
+            <div id="gender_input" class="insertmodule">
+                <span for = "gender_update" class="itemtitle">{{dbcols_update[7]}}: </span>
+                <select id="gender_update" name="gender_update" class="form-control">
+                    <option value={{result_update[7]}}>{{result_update[7]}}</option>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+            </div>
+                <div id="specialty_input" class="insertmodule">
+                <span for = "specialty_update" class="itemtitle">{{dbcols_update[8]}}: </span>
+                <input type = "text" id = "specialty_update" name = "specialty_update" class = "insertbox" required="required"  value={{result_update[8]}}></input> 
+            </div>
+            <div id="experience_input" class="insertmodule">
+                <span for = "experience_update" class="itemtitle">{{dbcols_update[9]}}: </span>
+                <input type = "text" id = "experience_update" name = "experience_update" class = "insertbox" required="required"  value={{result_update[9]}} maxlength="10"></input> 
+            </div>
+            <div id="certification_input" class="insertmodule">
+                <span for = "certification_update" class="itemtitle">{{dbcols_update[10]}}: </span>
+                <input type = "text" id = "certification_update" name = "certification_update" class = "insertbox" required="required"  value={{result_update[10]}}></input> 
+            </div>
+            <div id="photo_url_input" class="insertmodule">
+                <span for = "photo_url_update" class="itemtitle">{{dbcols_update[11]}}: </span>
+                <input type = "text" id = "photo_url_update" name = "photo_url_update" class = "insertbox" required="required"  value={{result_update[11]}}></input> 
+            </div>
+            <div id="user_type_input" class="insertmodule">
+                <span for = "user_type_update" class="itemtitle">{{dbcols_update[12]}}: </span>
+                <input type = "text" id = "user_type_update" name = "user_type_update" class = "insertbox" required="required"  value={{result_update[12]}} maxlength="255"></input> 
+            </div>
+            <div id="password_input" class="insertmodule">
+                <span for = "password_update" class="itemtitle">{{dbcols_update[13]}}: </span>
+                <input type = "text" id = "password_update" name = "password_update" class = "insertbox" required="required"  value={{result_update[13]}} maxlength="10"></input>
+            </div>
+            
+            {% endfor %}
+
+            <div class="button">
+                <div id = "submitdiv" class="controldiv">
+                    <input type="submit" id="mySubmit" name="mySubmit" class="submitbutton"/>
+                </div>
+                <div id = "resetdiv" class="controldiv">
+                    <input type="reset" id="myreset" class="resetbutton"/>
+                </div>
+                <div id = "returndiv" class="controldiv">
+                    <a href="{{ url_for('trainer_list') }}"><button id="returnlastpage" type="button" class="cancelbutton">Cancel</button></a>
+                </div>
+            </div>
+    </form>
+</div>
+
+
+{% endblock %}

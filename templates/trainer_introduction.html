@@ -1,0 +1,73 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Trainer List
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='trainer_introduction.css')}}" />
+
+{% endblock %}
+
+{% block content %}
+<h2>List of Trainers</h2>
+<div class="notice">
+    {% with messages = get_flashed_messages() %}
+     {% if messages %}
+           {% for message in messages %}
+                <p class="message">{{ message }}</p>
+           {% endfor %}
+     {% endif %}
+    {% endwith %}
+</div>
+{% for item in trainer_info%}
+
+<div class="brief clearfix">
+    <div class="photo">
+        <img class="avatar" src="../static/image/trainer1.jpg" alt="">
+    </div>
+    <div class="bio">
+        <p><span class="title">Name: </span> <span class="capital name">{{item[1]}} {{item[2]}}</span> </p>
+        <p><span class="title">Speciality: </span> <span class="capital">{{item[8]}}</span> </p>
+        <p><span class="title">Years of Experience: </span> <span class="capital">{{item[9]}}</span> </p>
+        <p><span class="title">Certification: </span> <span class="capital">{{item[10]}}</span> </p>
+        <p><span class="title">Phone: </span> <span class="capital">{{item[3]}}</span> </p>
+        <p><span class="title">Email: </span> <span class="capital">{{item[4]}}</span> </p>
+
+    </div>
+    <div class="book">
+        <a href="/pt_booking?trainerid={{item[0]}}">
+            <button type="button" class="btn btn-outline-dark submit">Book me</button>
+        </a>
+    </div>
+
+</div>
+{% endfor %}
+
+{% endblock %}
+
+{% block search%}
+<form class="d-flex search" action="/trainer_introduction" method="POST">
+    <input class="form-control me-2" type="text" placeholder="Search By Name" aria-label="Search"  name="name" id="content">
+    <button class="btn btn-outline-light" type="button" id="searchBtn">Search</button>
+</form>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    var btn = document.getElementById('searchBtn');
+    var content = document.getElementById('content');
+    var content_style = getComputedStyle(content,null);
+    console.log(content_style);
+    btn.onclick = function(){
+        if(content.value){
+            btn.type = "submit"
+        }else{
+            content.style.backgroundColor = "rgb(255, 197, 197)";
+            content.placeholder = "Please entry a name!";
+        }
+
+    }
+</script>
+{% endblock %}
+
+
+
+

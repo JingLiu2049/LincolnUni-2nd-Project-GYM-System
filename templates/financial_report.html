@@ -1,0 +1,59 @@
+{% extends "index_layout.html" %}
+
+{% block title %}Financial Report{% endblock title %}
+
+{% block head%}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='email.css')}}" />
+{% endblock head %}
+
+{% block manager %}
+<div class="container">
+    <div class="row">
+      <div class="col md-12">
+
+        <div class="jumbotron p-3">
+
+          <h3 class="with-margin">Financial Report</h3>
+
+          <p>Payments received for the period: {{start_date}} to {{end_date}}</p>
+        
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col"></th>
+                      {% for row in membership_payments %}
+                      <th scope="col">{{ row[0] }} </th>
+                      {% endfor %}
+                  </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                    <th scope="row">Membership Payments</th>
+                    {% for row in membership_payments %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="row">PT Payments</th>
+                    {% for row in pt_payments %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="row">Total</th>
+                    {% for row in total_payments %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+
+
+              </tbody>
+
+
+          </table>
+
+
+
+{% endblock%}

@@ -1,0 +1,21 @@
+.originallistdiv{
+    background-color: rgb(175, 173, 173, 0.7);
+    margin:50px 0 0 20px;
+}
+
+h1{
+    margin: 0 0 0 20px;
+}
+
+div.controlpane{
+    float:right;
+}
+
+div.delete_searchdiv{
+    float:right;
+    margin: 0 10px 0 0;
+}
+
+#originallist{
+    text-align: center;
+}

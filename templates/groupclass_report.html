@@ -1,0 +1,81 @@
+{% extends "index_layout.html" %}
+
+{% block title %}Group Class Attendance Report{% endblock title %}
+
+{% block head%}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='email.css')}}" />
+{% endblock head %}
+
+{% block manager %}
+<div class="container">
+    <div class="row">
+      <div class="col md-12">
+
+        <div class="jumbotron p-3">
+
+          <h3 class="with-margin">Group Class Attendance Report</h3>
+
+          <p>Group class attendance for the period: {{start_date}} to {{end_date}}</p>
+        
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col"></th>
+                      {% for row in boxfit_attendance %}
+                      <th scope="col">{{ row[0] }} </th>
+                      {% endfor %}
+                  </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                    <th scope="row">BOX FIT</th>
+                    
+                    {% for row in boxfit_attendance %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="row">Body Combat</th>
+                    {% for row in bodycombat_attendance %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="row">Grit Cardio</th>
+                    {% for row in gritcardio_attendance %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="row">Sprint</th>
+                    {% for row in sprint_attendance %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="row">Yoga</th>
+                    {% for row in yoga_attendance %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="row">Total</th>
+                    {% for row in total_attendance %}
+                    <td>{{ row[1] }}</td>
+                    {% endfor %}
+                </tr>
+
+
+              </tbody>
+
+
+          </table>
+
+
+
+{% endblock%}

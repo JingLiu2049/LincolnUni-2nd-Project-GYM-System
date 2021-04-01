@@ -1,0 +1,105 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='addnewmember.css')}}" />
+{% endblock %}
+
+{% block manager %}
+<h1>Lincoln GYM--Add New Member</h1>
+
+{% for message in get_flashed_messages() %}
+
+<div class=flash>{{ message }}</div>
+
+{% endfor %}
+
+<div class="memberadd_manager">
+
+    <form action="/add_member_interface" method="POST">
+
+        <div id="firstname_member" class="insertmodule">
+            <span for="firstname_member" class="itemtitle">First Name: </span>
+            <input type="text" id="firstname_member" name="firstname_member" class="insertbox" required="required" maxlength="30"/>
+        </div>
+
+        <div id="lastname_member" class="insertmodule">
+            <span for="lastname_member" class="itemtitle">Last Name: </span>
+            <input type="text" id="lastname_member" name="lastname_member" class="insertbox" required="required" maxlength="30"/>
+        </div>
+
+        <div id="phonenumber_member" class="insertmodule">
+            <span for="phonenumber_member" class="itemtitle">Phone Number: </span>
+            <input type="text" id="phonenumber_member" name="phonenumber_member" class="insertbox"
+                required="required" maxlength="24"/>
+        </div>
+
+        <div id="email_member" class="insertmodule">
+            <span for="email_member" class="itemtitle">E-mail: </span>
+            <input type="email" id="email_member" name="email_member" class="insertbox" required="required" maxlength="60"/>
+        </div>
+
+        <div id="address_member" class="insertmodule">
+            <span for="address_member" class="itemtitle">Address: </span>
+            <input type="text" id="address_member" name="address_member" class="insertbox" required="required" maxlength="60"/>
+        </div>
+
+        <div id="birthday_member" class="insertmodule">
+            <span for="birthday_member" class="itemtitle">Birthday: </span>
+            <input type="date" placeholder="dd/mm/yy" id="birthday_member" class="insertbox" name="birthday_member" />
+        </div>
+
+        <div id="gender_member" class="insertmodule">
+            <span for="gender_member" class="itemtitle">Gender: </span>
+            <select id="gender_member" name="gender_member" class="insertbox" required="required">
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+        </div>
+
+        <div id="goals_member" class="insertmodule">
+            <span for="goals_member" class="itemtitle">Goals: </span>
+            <input type="text" id="goals_member" name="goals_member" class="insertbox" required="required" />
+        </div>
+
+        <div id="medicalnotes_member" class="insertmodule">
+            <span for="medicalnotes_member" class="itemtitle">Medical Notes: </span>
+            <input type="text" id="medicalnotes_member" name="medicalnotes_member" class="insertbox" required="required" />
+        </div>
+
+        <div id="photo_member" class="insertmodule">
+            <span for="photo_member" class="itemtitle">Upload Photo: </span>
+            <input type = "text" id = "photo_member" name = "photo_member" class = "insertbox" placeholder = "add photo" required="required" maxlength="255"/> 
+        </div>
+
+        <div id="usertype_member" class="insertmodule">
+            <span for="usertype_member" class="itemtitle">User Type: </span>
+            <select id="usertype_member" name="usertype_member" class="insertbox" required="required">
+                <option value="member">member</option>
+                <option value="trainer">trainer</option>
+                <option value="manager">manager</option>
+            </select>
+        </div>
+
+        <div id="password_member" class="insertmodule">
+            <span for="password_member" class="itemtitle">Password: </span>
+            <input type="text" id="password_member" name="password_member" class="insertbox" required="required" maxlength="10"/>
+        </div>
+
+        <div class="button">
+            <div id = "submitdiv" class="controldiv">
+                <input type="submit" id="mySubmit" name="mySubmit" class="submitbutton"/>
+            </div>
+            <div id = "resetdiv" class="controldiv">
+                <input type="reset" id="myreset" class="resetbutton"/>
+            </div>
+            <div id = "returndiv" class="controldiv">
+                <a href="{{ url_for('member_list') }}"><button id="returnlastpage" type="button" class="cancelbutton">Cancel</button></a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

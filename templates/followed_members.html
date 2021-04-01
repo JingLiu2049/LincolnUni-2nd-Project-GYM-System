@@ -1,0 +1,54 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='followed_members.css')}}" />
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="classes container">
+
+<div class="pt_class">
+    <h3 class="center round">Members from Personal Sessions</h3>
+    {% for item in pt_members %}
+    <a href= "/profile?memberid={{item[0]}}">
+        <button type="button" class="btn btn-info"><span class="capital">{{item[1]}} {{item[2]}}  </span></button>
+    </a>
+    {% endfor %}
+</div>
+
+
+<div>
+    <h3 class="center round">Members from Group Class</h3>
+    
+    <div class="group_class">
+    <table class="table group_class">
+        <thead>
+            <th>Class</th><th>Date</th><th>Day</th><th>Time</th><th>Attendance/Booked</th>
+        </thead>
+        
+
+    
+    {% for item in classlist %}
+    
+    <tr>
+        <td>{{item[1]}}</td>
+        <td>{{item[2]}}</td> 
+        <td>{{item[3]}}</td> 
+        <td>{{item[4]}}</td> 
+        <td>{{item[5]}}/{{item[6]}}</td>
+    </tr>
+    
+    
+
+    {% endfor %}
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}

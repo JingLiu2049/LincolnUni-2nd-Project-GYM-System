@@ -1,0 +1,108 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Personal Training Sessions
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='session_list.css')}}" />
+
+
+{% endblock %}
+
+{% block manager %}
+<div class="outer container">
+    <div class="message">
+        {% with messages = get_flashed_messages() %}
+           {% if messages %}
+                 {% for message in messages %}
+                      <p class="message">{{ message }}</p>
+                 {% endfor %}
+           {% endif %}
+      {% endwith %}
+      </div>
+<div class="cust">
+    <form action="/session_list" method="POST">
+        <label for="start">Start Date: </label>
+        <input type="date" id="start" name="start" required value="{{cust[0]}}">
+        <label for="end">Start Date: </label>
+        <input type="date" id="end" name="end" required value="{{cust[1]}}">
+        <button type="submit">Submit</button>
+        
+    </form>
+
+</div>
+<table class="table">
+    <thead>
+        <th>Session ID</th>
+        <th>Session Date</th>
+        <th>
+            <select name="" id="select_day">
+                <option value="all">Session Day</option>
+            </select>
+        </th>
+        <th>Session Time</th>
+        <th>Session Price</th>
+        <th>
+            <select name="" id="select_name">
+                <option value="all">Trainer</option>
+            </select>
+        </th>
+
+    </thead>
+  
+    {% for item in pt_list%}
+    <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[2]}}</td>
+    <td class="weekday">{{item[5]}}</td>
+    <td>{{item[3]}}</td>
+    <td>{{item[4]}}</td>
+    <td class="trainer_name">{{item[6]}} {{item[7]}}</td>
+
+    <td><a href="/session_edit?update_id={{item[0]}}" >
+        <button type="button" name="group" class="btn btn-outline-dark">
+            Edit
+        </button></a></td>
+    <td><a href="/session_list?delete_id={{item[0]}}" >
+        <button type="button" name="group" class="btn btn-outline-dark">
+            Delete
+        </button></a></td>
+</tr>
+    {% endfor %}
+</table>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+   var select_name = document.getElementById('select_name');
+   var names = document.getElementsByClassName('trainer_name');
+   var select_day = document.getElementById('select_day');
+   var days = document.getElementsByClassName('weekday');
+
+
+   function inserts(arr, selection) {
+	var inner_list = [];
+	for (var i = 0; i < arr.length; i++) {
+		inner_list.push(arr[i].textContent)
+	}
+	var uni_arr = Array.from(new Set(inner_list))
+	for (var i = 0; i < uni_arr.length; i++) {
+		var option = document.createElement("option");
+		option.innerHTML = uni_arr[i];
+		option.value = uni_arr[i];
+		selection.appendChild(option);
+	}
+}
+
+    inserts(names,select_name)
+    inserts(days, select_day)
+    onchange_hidden(select_name,names)
+    onchange_hidden(select_day, days)
+
+
+</script>
+
+{% endblock %}

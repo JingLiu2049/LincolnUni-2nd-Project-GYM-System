@@ -1,0 +1,107 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Personal Training Attendance
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='attendance_pt.css')}}" />
+
+
+{% endblock %}
+
+{% block manager %}
+<h3>Personal Training Attndance</h3>
+<div class="outer clearfix">
+<div class="period">
+<table class="table period">
+
+<thead>
+    <th>Name</th> 
+        <th class="center">
+            <form action="/attendance_review/pt" id="period_form" method="POST">
+            <label for="select_month">Member Attendance</label> 
+            <select name="period" id="select_month"  >
+            <option value="1" >Last 30 Days</option>
+            <option value="3">Last 3 Months</option>
+            <option value="6">Last 6 Months</option>
+            <option value="12">Last 1 Year</option>
+            </select> 
+            </form>
+        </th>
+</thead>
+
+{% for item in period_attend %}
+    <tr>
+        <td> {{item[2]}} {{item[3]}}</td>
+        <td class="center"> {{item[0]}}</td>
+    </tr>
+{%endfor%}
+
+    
+</table>
+</div>
+
+<div class="customised">
+    <form action="/attendance_review/pt" method="POST">
+        <div>
+            <label for="start">Start Date: </label>
+            <input type="date" id="start" name="start" required value="{{cust_time[0]}}">
+            <button type="submit">Submit</button>
+        </div>
+        <div>
+            <label for="end">Start Date: </label>
+            <input type="date" id="end" name="end" required value="{{cust_time[1]}}">
+        </div>
+        
+        
+        
+        
+    </form>
+    {% if cust %}
+    <table class="table">
+        <thead>
+            <th>Name</th> <th class="center">Member Attendance</th>
+        </thead>
+        {% for item in cust%}
+        <tr>
+            <td>{{item[2]}} {{item[3]}}</td>
+            <td class="center">{{item[0]}}</td>
+        </tr>
+    {%endfor %}
+    </table>
+    {% endif %}
+</div>
+
+
+
+
+</div>
+
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+    var select_month = document.getElementById('select_month');
+    select_month.onchange = function(){
+        document.getElementById('period_form').submit()
+    }
+    var selected = '{{selected}}';
+    var options = document.querySelectorAll("#select_month option");
+    if(selected != 'False'){
+        test(selected)
+    for(var i = 0; i < options.length;i++){
+        if(options[i].value == selected){
+            test(options[i].value)
+            options[i].selected = true;
+        }
+    
+    
+    }
+    }
+    
+
+</script>
+
+{% endblock %}

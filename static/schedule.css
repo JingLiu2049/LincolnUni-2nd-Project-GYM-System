@@ -1,0 +1,128 @@
+button:hover{
+    color:rgb(204, 70, 70);
+}
+
+#listtitle{
+    font-family: cursive;
+    font-size: 2.5em;
+    color: #ffffff;
+
+}
+
+#trainernamelist{
+    background: rgba(119, 118, 118, 0.7);
+    width:300px;
+    height:670px;
+    position:absolute;
+    left:1400px;
+    top:130px;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    border-top-left-radius: 2em;
+    border-top-right-radius:2em ;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#insidebox_trainer{
+    background: rgb(255, 255, 255);
+    width:250px;
+    position:relative;
+    left:17px;
+    top:17px;
+}
+
+.trainernamebutton{
+    border-color: #ffffff;
+    border-width: 1px;
+    background: rgb(231, 185, 31);
+    width:230px;
+    height:80px;
+    margin:5px;
+    font-family: cursive;
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+.showbutton{
+    border-color: #ffffff;
+    width:150px;
+    height:75px;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border-top-left-radius: 1em;
+    border-top-right-radius:1em ;
+    font-family: cursive;
+    font-size: 1.2em;
+    color: #ffffff;
+}
+
+#showHidden1{
+    background-color: chocolate;
+    position:absolute;
+    left:70px;
+    top:120px;
+}
+
+#showHidden2{
+    background-color: rgb(161, 211, 43);
+    position:absolute;
+    left:225px;
+    top:120px;
+}
+
+#div1{
+    background: rgba(119, 118, 118, 0.7);
+    width:1300px;
+    height:600px;
+    position:absolute;
+    left:40px;
+    top:200px;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    border-top-left-radius: 2em;
+    border-top-right-radius:2em ;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#div2{
+    background: rgba(119, 118, 118, 0.7);
+    width:1300px;
+    height:600px;
+    position:absolute;
+    left:40px;
+    top:200px;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    border-top-left-radius: 2em;
+    border-top-right-radius:2em ;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+
+#searchbutton{
+    position:absolute;
+    left:535px;
+    top:45px;
+    color:#ffffff;
+    font-family: cursive;
+    background-color: rgb(85, 81, 81);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius:10px ;
+
+}
+
+
+
+
+
+
+
+
+
+

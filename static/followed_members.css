@@ -1,0 +1,15 @@
+h3{
+    margin: 1% 0 2%;
+    border: black solid 1px;
+    line-height: 2em;
+}
+div.group_class{
+    height: 55vh;
+    overflow-y: auto;
+
+}
+div.classes a{
+    color: rgb(32, 32, 32);
+    display: inline-block;
+
+}

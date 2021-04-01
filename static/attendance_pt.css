@@ -1,0 +1,21 @@
+.hidden{
+    display: none;
+}
+div.period{
+    width: 40%;
+    float: left;
+    border-right: 1px black solid;
+}
+div.customised{
+    width: 50%;
+    float: left;
+}
+.center{
+    text-align: center;
+}
+div.outer{
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    width: fit-content;
+    margin: 0 auto;
+}

@@ -1,0 +1,140 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Member Index
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='management_member.css')}}" />
+
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+<div class="brief clearfix">
+    <img src="../static/image/photosample.jpg"class="photo" alt="photo" />
+    <ul class="brief">
+        <li><span class="title">Name:  </span> <span class="capital strong">{{memberinfo[1]}} {{memberinfo[2]}}</span></li>
+        <li><span class="title">Type of Membership:  </span> <span class="capital">{{memberinfo[12]}}</span></li>
+        <li><span class="title">Joined Date:  </span> <span class="capital">{{memberinfo[14]}}</span></li>
+        <li><span class="title">Membership Status:  </span> <span class="capital">{{memberinfo[15]}}</span></li>
+    </ul>
+    
+</div>
+<hr>
+
+<div class="nav">  
+    <ul class="nav">
+        <li><a href="/profile" class="nav"><button type="button" class="btn btn-outline-dark">Personal Information</button></a></li>
+        <li><a href="/trainer_introduction" class="nav"><button type="button" class="btn btn-outline-dark">Trainer Introduction</button></a></li>
+        <li><a href="/book_group_class/" class="nav"> <button type="button" class="btn btn-outline-dark">Public Classes</button></a></li>
+        <li> <a href="/booked_class" class="nav"><button type="button" class="btn btn-outline-dark">Booked Information</button></a></li>
+        <li><a href="/payment_information" class="nav"><button type="button" class="btn btn-outline-dark">Payment Information</button></a></li>
+    </ul>
+
+    
+
+</div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}
+{% block attend %}
+<div class="attendance" id="attendance">
+    
+    <form action="#" class="attendance" method="POST">
+        <div class="close  clearfix">
+         <div class="close_w"><i class="fas fa-times" id="close"></i></div> 
+        </div>
+        <legend>Member Checkin</legend>
+        {% if booked_groups %}
+        <h3>Today's Group Class</h3>
+        <table class="table group">
+            <thead>
+                <th></th>
+                <th>Class</th>
+                <th>Time</th>
+                <th>Rome</th>
+                <th>Trainer</th>
+            </thead>
+            {% for booked_group in booked_groups%}
+            <tr>
+                <td><input type="checkbox" id="{{booked_group[0]}}" name="group_bookingid" value="{{booked_group[0]}}">
+                </td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[7]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[10]}} - {{booked_group[11]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[12]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[13]}} {{booked_group[14]}}</span> </label></td>
+            </tr>
+
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% if booked_pts %}
+        <h3>Today's Personal Training</h3>
+        <table class="table pt">
+
+            <thead>
+                <th></th>
+                <th>Session Time</th>
+                <th>Trainer</th>
+            </thead>
+            {% for booked_pt in booked_pts%}
+            <tr>
+                <td><input type="checkbox" id="{{booked_pt[0]}}" name="pt_bookingid" value="{{booked_pt[0]}}"> </td>
+                <td><label for="{{booked_pt[0]}}"><span class="capital">{{booked_pt[8]}}</span> </label></td>
+                <td><label for="{{booked_pt[0]}}"><span class="capital">{{booked_pt[9]}} {{booked_pt[10]}}</span>
+                    </label></td>
+            </tr>
+
+            {% endfor %}
+        </table>
+        {% endif%}
+        {% if not booked_groups and not booked_pts %}
+        <h3>No booked classes today, enjoy the gym!</h3>
+
+        {% endif %}
+
+        <div class=" button">
+            <button type="submit" class="btn btn-outline-dark submit" id="checkin">Check In</button>
+            <button type="reset" class="btn btn-outline-dark submit">Reset</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+
+    {% block js %}
+<script type="text/javascript">
+    var attend = document.getElementById('attendance');
+    var checkin = document.getElementById('checkin');
+    var end = document.getElementById('close');
+    if(!sessionStorage.getItem("isReload")){
+     console.log('shouci');
+     window.onload = function(){
+        attend.className = "display";
+     sessionStorage.setItem("isReload", true);
+    }
+    }else{
+        console.log('shuaxin')
+    }
+    
+    checkin.onclick = function(){
+        toggleClass(attend,'attendance');
+    }
+
+    end.onclick = function(){
+        toggleClass(attend,'attendance');
+    }
+
+ 
+   
+
+</script>
+
+{% endblock %}

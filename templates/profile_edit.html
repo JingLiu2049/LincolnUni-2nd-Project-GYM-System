@@ -1,0 +1,125 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Profile Editing
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile_edit.css')}}" />
+
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="form_wrapper">
+
+<form action="/profile/edit" method="POST">
+
+    <legend>Personal Profile</legend>
+    {% if profileinfo %}
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon1">Member ID</span>
+        <input type="text" class="form-control" name="memberid" aria-describedby="basic-addon1" required {% if
+            profileinfo %} value="{{profileinfo[0]}}" {% endif %} {% if usertype != 'manager' %} readonly {% endif %} >
+   </div>
+
+    {% else %}
+    <input type="text" name="memberid" value="{{memberid}}" hidden>
+    {% endif %}
+    
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon1">First Name</span>
+        <input type="text" class="form-control" name="firstname" aria-describedby="basic-addon1" required {% if
+            profileinfo %} value="{{profileinfo[1]}}" {% endif %} {% if usertype != 'manager' %} readonly {% endif %} >
+   </div>
+   <div class="input-group ">
+    <span class="input-group-text" id="basic-addon1">Last Name</span>
+    <input type="text" class="form-control" name="lastname" aria-describedby="basic-addon1" required {% if
+        profileinfo %} value="{{profileinfo[2]}}" {% endif %} {% if usertype != 'manager' %} readonly {% endif %} >
+    </div>
+    
+    
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Date of birth</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[6]}}" {% else %} type="date" {% endif
+            %} required class="form-control" name="birthday" aria-describedby="basic-addon3" 
+            {% if usertype != 'manager' %} readonly {% endif %} >
+    </div>
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Gender</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[7]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="gender" aria-describedby="basic-addon3" 
+            {% if usertype != 'manager' %} readonly {% endif %} >
+    </div>
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Phone Number</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[3]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="phone" aria-describedby="basic-addon3" maxlength="24">
+    </div>
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Email Address</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[4]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="email" aria-describedby="basic-addon3" maxlength="60">
+    </div>
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Home Address</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[5]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="address" aria-describedby="basic-addon3" maxlength="60">
+    </div>
+    {% if usertype == 'member' or viewer == 'edit_member' %}
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Goals</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[8]}}" {% else %} type="text" {% endif
+            %} class="form-control" name="goals" aria-describedby="basic-addon3">
+    </div>
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Medical Note</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[9]}}" {% else %} type="text" {% endif
+            %}  class="form-control" name="medical" aria-describedby="basic-addon3" >
+    </div>
+    <div class="input-group ">
+        <input {% if profileinfo %} type="text" value="{{profileinfo[10]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="photo" aria-describedby="basic-addon3" hidden>
+    </div>
+    <input type="text" name = "edit" value = "member" hidden>
+    {% elif usertype == 'trainer' or usertype == 'manager' %}
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Speciality</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[8]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="speciality" aria-describedby="basic-addon3">
+    </div>
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Years of Experience</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[9]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="experience" aria-describedby="basic-addon3" maxlength="10">
+    </div>
+    <div class="input-group ">
+        <span class="input-group-text" id="basic-addon3">Certification</span>
+        <input {% if profileinfo %} type="text" value="{{profileinfo[10]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="certification" aria-describedby="basic-addon3">
+    </div>
+    <div class="input-group ">
+        <input {% if profileinfo %} type="text" value="{{profileinfo[11]}}" {% else %} type="text" {% endif
+            %} required class="form-control" name="photo" aria-describedby="basic-addon3" hidden>
+    </div>
+    {% endif %}
+
+    <div class="button">
+
+
+        <button type="submit" name="group" class="btn btn-warning">
+            Submit
+        </button>
+        <button type="reset" name="group" class="btn btn-info">
+            Reset
+        </button>
+        
+        {% if usertype == 'member' or viewer == 'edit_member' %}
+            <a href="{{ url_for('member') }}"><button id="returnlastpage" type="button" class="btn btn-info">Cancel</button></a>
+        {% elif usertype == 'trainer' or usertype == 'manager' %}
+            <a href="{{ url_for('trainer') }}"><button id="returnlastpage" type="button" class="btn btn-info">Cancel</button></a>
+        {% endif %}
+    </div>
+    </form>
+</div>
+
+{% endblock %}

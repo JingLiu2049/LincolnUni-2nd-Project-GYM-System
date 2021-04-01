@@ -1,0 +1,55 @@
+body{
+    background-image: url(image/home_background.png);
+    background-size:cover;
+}
+div.topbar{
+    background-color: #212529;
+    color: white;
+    line-height: 3em;
+    padding: 0 4%;
+}
+#logout{
+    display: none;
+}
+div.form_wrapper{
+    float: left;
+    width: 40%;
+}
+form{
+    width: 70%;
+    margin: 0 auto;
+}
+div.button{
+    margin-top: 10%;
+}
+button{
+    width: 100%;
+    margin-bottom: 5%;
+}
+div.banner{
+    float: right;
+    width: 60%;
+}
+div.container{
+    margin-top: 5%;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    padding-right: 0;
+}
+img{
+    width: 100%;
+    border-radius: 0 25px 25px 0;
+}
+div.logo{
+    float: left;
+    height: 200px;
+    width: 500px;
+}
+div.error{
+    height: 1.5em;
+    text-align: center;
+    color: red;
+    width: 80%;
+    margin: 0 auto;
+}

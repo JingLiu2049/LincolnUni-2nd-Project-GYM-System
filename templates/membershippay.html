@@ -1,0 +1,118 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='membershippay.css')}}" />
+
+{% endblock %}
+
+{% block content %}
+<h1>membership pay interface</h1>
+
+{% for message in get_flashed_messages() %}
+  
+      <div class=flash>{{ message }}</div>
+  
+{% endfor %}
+
+<form action = "/membershippay" method = "POST">
+
+<div id="payinterface">
+<img src="../static/image/exercise3.jpg" class="membershipimage" alt="membershipimage"/>
+    <div class = "Introduction">
+        <div id="weekly_m" class="introduction_m">
+            <P>
+                Become a weekly member:
+                。You can ……
+                。You can ……
+                。You can ……
+                。You can ……
+            </p>
+        </div>
+        <div id="monthly_m" class="introduction_m">
+            <P>
+                Become a monthly member:
+                。You can ……
+                。You can ……
+                。You can ……
+                。You can ……
+            </p>
+        </div>
+        <div id="yearly_m" class="introduction_m">
+            <P>
+                Become a yearly member:
+                。You can ……
+                。You can ……
+                。You can ……
+                。You can ……
+            </p>
+        </div>
+        
+    </div>
+    <div class="inforarea">
+        <div class="Tittle">
+            <label for = "membershiptypes" class ="infordisplay">Membership Type: </label>
+            <input type = "hidden" id = "membershiptypes" name = "membershiptypes" class ="payninfor" value = {{membershiptype_result}}>{{membershiptype_result}}</input> 
+        </div>
+    
+        <div class="cost">
+            <label for = "unitcost" class ="infordisplay">Cost: </label>
+            <input type = "hidden" id = "unitcost" name = "unitcost" class ="payninfor" value = {{memberunitcost_result}}>{{memberunitcost_result}}</input> 
+        </div>
+    
+        <div class="date">
+            <label for = "lastpaydate" class ="infordisplay">Lastpay Date: </label>
+            <input type = "hidden" id = "lastpaydate" name = "lastpaydate" class ="payninfor" value = {{lastpaydate_result}}>{{lastpaydate_result}}</input> 
+        </div>
+    
+        <div class="quantity">
+            <label for = "quantity" class ="infordisplay">Quantity: </label>
+            <input type = "text" id = "quantity" name = "quantity" class ="payquantity" onchange="calculation2()"/>
+        </div>
+    
+        <div class="calculate">
+            <label for = "Amount_calculate" class ="infordisplay">Amount payable: </label>
+            <span id="Amount_payable" name="Amount_payable"></span>
+        </div>
+    
+        <div class="amount">
+            <label for = "Amount" class ="infordisplay">Amount: </label>
+            <input type="text" id="Amount" name="Amount" class="Amountbox" required="required"/>
+        </div>
+        
+        <script type="text/javascript">
+            function calculation2() {
+                var input = document.getElementById("unitcost").value;
+                var unitcost = input*1;
+                // alert(unitcost);
+                var input1 = document.getElementById("quantity").value;
+                var paynumber = input1*1;
+                // alert(typeof(paynumber))   
+                unitcost *= paynumber;  
+                document.getElementById("Amount_payable").innerHTML = unitcost; 
+                
+            }
+        </script>
+    </div>
+    
+    <div class="button">
+
+        <button type="submit" name="group" class="btn btn-warning">
+            Pay
+        </button>
+        <button type="reset" name="group" class="btn btn-info">
+            Reset
+        </button>
+        
+        <a href="{{ url_for('member') }}"><button id="returnlastpage" type="button" class="btn btn-info">Cancel</button></a>
+          
+    </div>
+</div>
+
+</form>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,81 @@
+
+div.brief{
+    padding: 2% 10%;
+}
+div.brief img{
+    float: left;
+    width: 25%;
+}
+div.brief ul{
+    float: left;
+    margin-left: 15%;
+    width: 45%;
+}
+ul.brief span{
+    font-size: 1.5em;
+    line-height: 2.5em;
+    margin-right: 8%;
+}
+ul.nav{
+    width: 100%;
+}
+ul.nav li{
+    margin: 1%;
+}
+a.nav button{
+    font-size: 1.3em;
+}
+div.attendance{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(221,221,221, 0.3);
+    display: none;
+
+}
+form.attendance{
+    width: 40%;
+    margin: 7% auto;
+    background-color: white;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0, 0.8);
+    padding-bottom: 5px;
+    
+}
+.display{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(221,221,221, 0.3);
+    display: block;
+}
+div.close{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+}
+div.close_w{
+    float: right;
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 50%;
+}
+div.close_w:hover{
+    background-color: white;
+}
+i{
+    color: white;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+i:hover{
+    color: black;
+}
+i:active{
+    color:  white;
+}
+
+
+

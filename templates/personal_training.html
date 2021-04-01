@@ -1,0 +1,120 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='personal_training.css')}}" />
+
+{% endblock %}
+
+{% block content %}
+<form action="/pt_booking" method="POST">
+<table class="table">
+    <tr class="head">
+        <th>Select</th>
+        <th><select id="select_date">
+            <option value="all" selected >Month</option>
+            
+        </select> </th>
+
+        <th> 
+            <select class="capital" id="select_day">
+                <option value="all" selected >Weekday</option>
+                
+                
+            </select> </th>
+        <th>Time</th>
+        <th>Price</th>
+        <th>Availability</th>
+    </tr>
+{% for ptinfo in ptinfos%}
+<tr >
+    <td><input type="checkbox" id="{{ptinfo[0]}}" name= "ptid"
+        value="{{ptinfo[0]}}" {% if ptinfo[0] in booked %} disabled {% endif %}> </td>
+    <td ><label for="{{ptinfo[0]}}" > {{ptinfo[2]}}</label></td>
+    <td ><label for="{{ptinfo[0]}}" class="capital option_day">{{ptinfo[5]}}</label></td>
+    <td hidden><label for="{{ptinfo[0]}}" class="option_month">{{ptinfo[6]}}</label></td>
+    <td><label for="{{ptinfo[0]}}">{{ptinfo[3]}}</label></td>
+    <td><label for="{{ptinfo[0]}}">{{ptinfo[4]}}</label></td>
+    
+    <td><label for="{{ptinfo[0]}}"> </label>{% if ptinfo[0] in booked %} Booked {% endif %}</td>
+    
+    
+</tr>
+
+{% endfor %}
+</table>
+<div class="container button">
+    
+    <button type="button" id="submit" class="btn btn-outline-dark submit">Submit</button>
+    <button type="reset" class="btn btn-outline-dark submit">Reset</button>
+    <a href="/trainer_introduction">
+        <button type="button" class="btn btn-outline-dark submit">Cancel</button>
+    </a>
+    
+</div>
+</div>
+</form>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    
+    var btn = document.getElementById('submit')
+    btn.onclick = function cancel_alert() {
+
+        if (confirm("Book these sessions?")) {
+            btn.setAttribute("type", "submit")
+        }
+    }
+
+    var select_date = document.getElementById('select_date');
+    var select_day = document.getElementById('select_day');
+    var option_month = document.getElementsByClassName('option_month');
+    var option_day = document.getElementsByClassName('option_day');
+    for (var i = 0; i < option_month.length; i++) {
+        option_month[i].innerHTML *= 1;
+    }
+
+    function inserts(arr, selection) {
+        var inner_list = [];
+        for (var i = 0; i < arr.length; i++) {
+            inner_list.push(arr[i].textContent)
+            test(arr[i].textContent)
+        }
+        var uni_arr = Array.from(new Set(inner_list))
+        for (var i = 0; i < uni_arr.length; i++) {
+            var option = document.createElement("option");
+            option.innerHTML = uni_arr[i];
+            option.value = uni_arr[i];
+            selection.appendChild(option);
+        }
+    }
+    
+
+    function onchange_hidden(select,arr){
+
+        select.onchange = function () {
+            var value = select.value;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].textContent == value) {
+                    removeClass(arr[i].parentElement.parentElement, "hidden")
+                }
+                else if (value == "all") {
+                    removeClass(arr[i].parentElement.parentElement, "hidden")
+                } else {
+                    addClass(arr[i].parentElement.parentElement, "hidden")
+                }
+            }
+        }
+    
+    }
+    
+    insert_option(option_month, select_date)
+    inserts(option_day, select_day)
+
+    onchange_hidden(select_date,option_month)
+    onchange_hidden(select_day,option_day)
+</script>
+
+{% endblock %}

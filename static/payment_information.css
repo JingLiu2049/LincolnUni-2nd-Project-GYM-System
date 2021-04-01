@@ -1,0 +1,70 @@
+#div1{
+    background:rgb(163, 158, 158,0.7);
+    box-shadow:rgb(255, 255, 255) 10px 10px 20px;
+    font-family: cursive;
+    font-size: 2em;
+    height:500px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius:20px ;
+    margin:10px;
+    padding:80px 150px 0 150px;
+}
+
+.inforpay{
+    margin:10px;
+}
+
+#paymentmemberid_d{
+    float:left;
+
+}
+
+#paymentmembername_d{
+    float:right;
+}
+
+#lastpaydate_d{
+    float:left;
+}
+#paymenttype_d{
+    float:right;
+}
+
+#paymentduedate_d{
+    float:left;
+}
+
+#membershipremainedday_d{
+    float:right;
+}
+
+#paymentoutstanding_d{
+    float:left;
+}
+
+#balanceamount_d{
+    float:right;
+}
+
+#mySubmit{
+    float:left;
+    width:50%;
+    margin:30px 0 0 200px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius:10px ;
+
+}
+
+div.paybutton{
+    float:right;
+    margin:50px 300px 0 0;
+
+}
+
+.btn{
+    width:600%;
+}

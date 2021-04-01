@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"  />
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{url_for('static', filename = 'reset.css')}}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static', filename = 'index_layout.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename = './css/all.css')}}">
+  <script type="text/javascript" src="/static/js/tools.js"></script>
+
+  {% block head%}
+  {% endblock %}
+</head>
+
+
+<body>
+  <header>
+    <div class="topbar">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Logo</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if usertype == 'member'%}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{url_for('member')}}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/trainer_introduction">Trainers</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/book_group_class/">Group Classes</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/booked_class">Booked Classes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/payment_information">Payment</a>
+              </li>
+
+            </ul>
+            {% elif usertype == 'trainer' %}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/trainer">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/trainer/followed_members">Followed Members</a>
+              </li>
+
+            </ul>
+            {% elif usertype == 'manager' %}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="top_slogen">
+                <a class="nav-link" href="/manager">The Lincoln Fitness Management System</a>
+                </li>
+            </ul>
+
+            {% endif %}
+            <div class="name">
+              <span class="captial name">Welcome, {{name[0]}} {{name[1]}}</span>
+
+            </div>
+            {% block search%}
+            {% endblock %}
+
+
+            <a href="/logout" id="logout">
+              <button type="button" class="btn btn-outline-light">Logout</button>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+
+
+
+
+
+
+
+  </header>
+  <section>
+    {% block attend %}
+    {% endblock %}
+    {% if usertype == 'manager'%}
+    <div class="manager_wrapper clearfix">
+      <div id="my_menu" class="sdmenu">
+        <div>
+          <span class="menuSpan">Members</span>
+          <a href="/memberlist">Management--Member</a>
+          <a href="/add_member_interface">Add Member</a>
+          <a href="/attendance_review/member">Attendance</a>
+          <a href="{{ url_for('membership_list_manager') }}">Subscription and Reminder</a>
+          <a href="/contact_members">Notification</a>
+        </div>
+        <div >
+          <span class="menuSpan">Trainers</span>
+          <a href="/trainer_list">Trainer List</a>
+          <a href="/add_trainer_interface">Add Trainer</a>
+        </div>
+        <div >
+          <span class="menuSpan">Group Class</span>
+          <a href="{{ url_for('public_class_manager') }}">Manage Classes</a>
+          <a href="{{ url_for('add_class_interface') }}">Add Class</a>
+          <a href="{{ url_for('groupclass_report_generator') }}">Group Class Attendance</a>
+        </div>
+        <div >
+          <span class="menuSpan">Personal Training</span>
+          <a href="/session_list">Session List</a>
+          <a href="/session_edit">Add Session</a>
+          <a href="/attendance_review/pt">Session Attendance</a>
+        </div>
+        <div >
+          <span class="menuSpan">Financial</span>
+          <a href="{{ url_for('financial_report_generator') }}">Report</a>
+          
+        </div>
+        
+      </div>
+      <div class="manager_content">
+        {% block manager %}
+        {% endblock %}
+      </div>
+    </div>
+    {%else%}
+    <div class="container main_wrapper">
+      {% block content %}
+      {% endblock %}
+    </div>
+    {% endif %}
+
+   
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+
+
+  <script type="text/javascript">
+    var menuSpan = document.querySelectorAll(".menuSpan");
+				
+				var openDiv = menuSpan[0].parentNode;
+				
+				for(var i=0 ; i<menuSpan.length ; i++){
+					menuSpan[i].onclick = function(){
+						var parentDiv = this.parentNode;
+						toggleMenu(parentDiv);
+						openDiv = parentDiv;
+					};
+				}
+				
+				function toggleMenu(obj){
+					var begin = obj.offsetHeight;
+					toggleClass(obj , "collapsed");
+					var end = obj.offsetHeight;
+					obj.style.height = begin + "px";
+					move(obj,"height",end,20,function(){
+						obj.style.height = "";
+					});
+						
+				}
+
+  </script>
+
+  {% block js %}
+  {% endblock %}
+
+</body>
+
+</html>

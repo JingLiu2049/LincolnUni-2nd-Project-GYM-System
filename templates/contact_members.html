@@ -1,0 +1,84 @@
+{% extends "index_layout.html" %}
+
+{% block title %}Contact Members{% endblock title %}
+
+{% block head%}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='email.css')}}" />
+{% endblock head %}
+
+{% block manager %}
+<div class="container">
+    <div class="row">
+      <div class="col md-12">
+
+        <div class="jumbotron p-3">
+
+          <form action="{{url_for('contact_members_email')}}" method="POST">
+
+          <h3 class="with-margin">Select Email Recipients</h3>
+        
+         
+
+          <div class="text-center with-margin">
+                <button class="btn btn-dark btn-sm" type="button" onclick="selects()">Select All</button>
+                <button class="btn btn-dark btn-sm" type="button" onclick="deSelect()">Unselect All</button>
+                <input class="btn btn-dark btn-sm" type="submit" onclick="location.href='/contact_members/email';">
+          </div>
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Recipient</th>
+                <th>Email Address</th>
+                <th>Send</th>
+
+              </tr>
+            </thead>
+
+          {# this is a comment the line below prints the db result #}
+
+          <tbody>
+            {% for result in dbresult %}
+            <tr>
+              
+              <td> {{ result[1] }} {{ result[2] }} </td>
+              <td> {{ result[3] }} </td>                  
+              <td>
+                <input  type="checkbox" name="recipients" \
+                id="recipients" value="{{ result[3] }}"></td>          
+            </tr>
+            {% endfor %}
+      
+          </tbody>
+        </form>
+        </table>
+
+       
+<script type="text/javascript">  
+          function selects(){  
+              var ele=document.getElementsByName('recipients');  
+              for(var i=0; i<ele.length; i++){  
+                  if(ele[i].type=='checkbox')  
+                      ele[i].checked=true;  
+              }  
+          }  
+          function deSelect(){  
+              var ele=document.getElementsByName('recipients');  
+              for(var i=0; i<ele.length; i++){  
+                  if(ele[i].type=='checkbox')  
+                      ele[i].checked=false;  
+                    
+              }  
+          }             
+</script>  
+
+
+
+        </form>
+
+        </div>
+      </div>
+    </div> 
+</div>
+
+{% endblock%}

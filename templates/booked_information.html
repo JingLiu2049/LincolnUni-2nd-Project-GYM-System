@@ -1,0 +1,117 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Booked Information
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='booked_information.css')}}" />
+
+
+{% endblock %}
+
+{% block content %}
+<h2>Booked Information</h2>
+
+<div class="outer">
+<div class="notice">
+    {% with messages = get_flashed_messages() %}
+     {% if messages %}
+           {% for message in messages %}
+                <p class="message">{{ message }}</p>
+           {% endfor %}
+     {% endif %}
+    {% endwith %}
+</div>
+
+<form action="/booked_class" method="POST">
+    <div class="booked_group">
+        <h3> Group Classes</h3>
+        <table class="table">
+            <thead>
+                <th></th>
+                <th>Class</th>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Roome</th>
+                <th>Trainer</th>
+            </thead>
+            {% for booked_group in booked_groups%}
+            <tr>
+                <td><input type="checkbox" id="{{booked_group[0]}}" name="group_bookingid" value="{{booked_group[0]}}">
+                </td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[7]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[8]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[9]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[10]}} - {{booked_group[11]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[12]}}</span> </label></td>
+                <td><label for="{{booked_group[0]}}"><span class="capital">{{booked_group[13]}} {{booked_group[14]}}</span> </label></td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+    <div class="booked_pt">
+
+        <h3> Personal Sessions</h3>
+        <table class="table">
+
+            <thead>
+                <th></th>
+                <th>Booking Date</th>
+                <th>Session Date</th>
+                <th>Session Time</th>
+                <th>Trainer</th>
+            </thead>
+            {% for booked_pt in booked_pts%}
+            <tr>
+                <td><input type="checkbox" id="{{booked_pt[0]}}" class="pt_bookingid" name="pt_bookingid" value="{{booked_pt[0]}}"> </td>
+                <td><label for="{{booked_pt[0]}}"><span class="capital">{{booked_pt[3]}}</span> </label></td>
+                <td><label for="{{booked_pt[0]}}"><span class="capital">{{booked_pt[7]}}</span> </label></td>
+                <td><label for="{{booked_pt[0]}}"><span class="capital">{{booked_pt[8]}}</span> </label></td>
+                <td><label for="{{booked_pt[0]}}"><span class="capital">{{booked_pt[9]}} {{booked_pt[10]}}</span>
+                    </label></td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="container button">
+
+        <button type="button" class="btn btn-outline-dark submit" id="submit">Cancel the Class</button>
+        <button type="reset" class="btn btn-outline-dark submit">Reset</button>
+
+    </div>
+
+</form>
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    
+    var btn = document.getElementById('submit')
+    btn.onclick = function() {
+
+        if (confirm("The class will be canceled!")) {
+            btn.type = "submit"
+        }
+    }
+    var ptid = document.getElementsByClassName('pt_bookingid');
+    for(var i = 0; i<ptid.length; i++){
+        console.log(ptid[i].value)
+    }
+
+</script>
+
+{% endblock %}

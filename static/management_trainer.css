@@ -1,0 +1,26 @@
+div.brief{
+    padding: 2% 10%;
+}
+div.brief img{
+    float: left;
+    width: 35%;
+}
+div.brief ul{
+    float: left;
+    margin-left: 15%;
+    width: 40%;
+}
+ul.brief span{
+    font-size: 1.5em;
+    line-height: 2.5em;
+    margin-right: 8%;
+}
+ul.nav{
+    width: 100%;
+}
+ul.nav li{
+    margin: 1%;
+}
+a.nav button{
+    font-size: 1.3em;
+}

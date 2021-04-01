@@ -1,0 +1,71 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Personal Training Sessions
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='session_edit.css')}}" />
+
+
+{% endblock %}
+
+{% block manager %}
+<div class="form_wrapper container">
+
+    <form action="/session_edit" method="POST" class="session_edit">
+        <div class="input-group ">
+            <span class="input-group-text" id="basic-addon3">Session ID</span>
+            <input  type="text" value="{{pt_info[0]}}" type="text" 
+                class="form-control" name="id" aria-describedby="basic-addon3" readonly>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-text" id="basic-addon3">Trainer</span>
+
+            <select name="trainerid" id=""   class="form-control" aria-describedby="basic-addon3" required>
+                <option value="{{pt_info[1]}}" selected>{{pt_info[6]}} {{pt_info[7]}}</option>
+
+                {% for item in trainer_list %}
+                <option value="{{item[0]}}">{{item[1]}} {{item[2]}}</option>
+                {%endfor%}
+            </select>
+
+                 
+        </div>
+        <div class="input-group ">
+            <span class="input-group-text" id="basic-addon3">Session Date</span>
+            <input  type="date" value="{{pt_info[2]}}" type="text" 
+                class="form-control" name="date" aria-describedby="basic-addon3" required>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-text" id="basic-addon3">Session Time</span>
+            <input  type="time" value="{{pt_info[3]}}" type="text" 
+                class="form-control" name="time" aria-describedby="basic-addon3"  required>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-text" id="basic-addon3">Session Price</span>
+            <input  type="text" value="{{pt_info[4]}}" type="text" 
+                class="form-control" name="cost" aria-describedby="basic-addon3"  required>
+        </div>
+
+        <div class="button">
+
+
+            <button type="submit" id="submit" name="group" class="btn btn-warning">
+                Submit
+            </button>
+            <button type="reset" name="group" class="btn btn-info">
+                Reset
+            </button>
+            <a href="javascript:history.go(-1)"><button type="button" id="cancel" name="group" class="btn btn-cancel">
+                Cancel
+            </button></a>
+        </div>
+    </form>
+</div>
+    {% endblock %}
+
+    {% block js %}
+    <script type="text/javascript">
+    
+    </script>
+    
+    {% endblock %}

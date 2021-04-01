@@ -1,0 +1,86 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='memberlist.css')}}" />
+
+{% endblock %}
+{% block search %}
+>
+
+{% endblock %}
+
+{% block manager %}
+<div class="bigdiv">
+    <div class="header clearfix">
+        <h3>Lincoln GYM--Management--Member</h3>
+        <div class="member_search">
+            <form action="/member_search_list" method="POST">
+                <input type="text" id="searchbox" name="searchbox" />
+                <input type="submit" id="mySearch" value="Search" />
+            </form>
+        </div>
+    </div>
+
+
+    {% for message in get_flashed_messages() %}
+
+    <div class=flash>{{ message }}</div>
+
+    {% endfor %}
+
+    <div class="memberlist_manager">
+
+
+        <table id="listtable" class="table table-hover">
+            <thead class="member_col">
+                <tr>
+                    {% for col in dbcols %}
+                    <th class="capital">{{col}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody class="member_content">
+                {% for result in dbresult %}
+                <tr>
+                    <td>{{result[0]}}</td>
+                   <td><a href="/profile?memberid={{result[0]}}">{{result[1]}}</a></td>
+                    <td>{{result[2]}}</td>
+                    <td>{{result[3]}}</td>
+                    <td>{{result[4]}}</td>
+                    <td>{{result[5]}}</td>
+                    <td>{{result[6]}}</td>
+                    <td><a href="/update_member_interface?correspondingid={{result[0]}}"><button
+                                type="button">Update</button></a></td>
+                    <td><a href="/delete_member_interface?correspondingid_d={{result[0]}}"><button type="button"
+                                id="deletemember">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    {% block js %}
+    <script type="text/javascript">
+
+        var btn = document.getElementById('deletemember')
+        btn.onclick = function () {
+            if (confirm("Are you sure you want to deactivate this member?")) {
+                btn.type = "submit"
+            }
+        }
+
+
+    </script>
+
+
+    {% endblock %}
+
+</div>
+
+
+
+{% endblock %}

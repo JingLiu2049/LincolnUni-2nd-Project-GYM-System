@@ -1,0 +1,60 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='payment_information_manager.css')}}" />
+
+{% endblock %}
+
+{% block manager %}
+<h1>Lincoln GYM--Payment Information</h1>
+<form action="/payment_reminder" method="POST" >
+<div id="div1" >
+    <div id = "paymentmemberid_d" class="inforpay">
+        <label for = "paymentmemberid" class ="paymentmemberid">Member ID: </label>
+        <input type = "hidden" id = "paymentmemberid" name = "paymentmemberid" class ="paymentmemberid" value = {{Member_id_display}}>{{Member_id_display}}</input> 
+    </div>
+
+    <div id = "paymentmembername_d" class="inforpay">
+        <label for = "paymentmembername" class ="paymentmembername">Member Name: </label>
+        <input type = "hidden" id = "paymentmembername" name = "paymentmembername" class ="paymentmembername" value = {{name_display}}>{{name_display}}</input> 
+    </div>
+
+    <div id = "lastpaydate_d" class="inforpay">
+        <label for = "lastpaydate" class ="lastpaydate">Last Payment Date: </label>
+        <input type = "hidden" id = "lastpaydate" name = "lastpaydate" class ="lastpaydate">{{lastdate}}</input> 
+    </div>
+
+    <div id = "paymenttype_d" class="inforpay">
+        <label for = "paymenttype" class ="paymenttype">Payment Type: </label>
+        <input type = "hidden" id = "paymenttype" name = "paymenttype" class ="paymenttype">{{membershiptype_result}}</input> 
+    </div>
+
+    <div id = "paymentduedate_d" class="inforpay">
+        <label for = "paymentduedate" class ="paymentduedate">Payment Due Date: </label>
+        <input type = "hidden" id = "paymentduedate" name = "paymentduedate" class ="paymentduedate" value = {{duedate}}>{{duedate}}</input> 
+    </div>
+
+    <div id = "membershipremainedday_d" class="inforpay">
+        <label for = "membershipremainedday" class ="membershipremainedday">Membership Remained: </label>
+        <input type = "hidden" id = "membershipremainedday" name = "membershipremainedday" class ="membershipremainedday" value = {{remained_day}}>{{remained_day}}</input> 
+    </div>
+
+    <div id = "paymentoutstanding_d" class="inforpay">
+        <label for = "paymentoutstanding" class ="paymentoutstanding">Payment Outstanding: </label>
+        <input type = "hidden" id = "paymentoutstanding" name = "paymentoutstanding" class ="paymentoutstanding">{{os_balance}}</input> 
+    </div>
+
+    <div id = "balanceamount_d" class="inforpay">
+        <label for = "balanceamount" class ="balanceamount">Balance: </label>
+        <input type = "hidden" id = "balanceamount" name = "balanceamount" class ="balanceamount">{{just_balance}}</input> 
+    </div>
+    
+    <input type = "submit" id="mySubmit"  value="Remind"/>
+    <a href="{{ url_for('membership_list_manager') }}"><button id="returnlastpage" type="button" class="controlbutton">Cancel</button></a>
+</div>
+</form>
+
+
+{% endblock %}

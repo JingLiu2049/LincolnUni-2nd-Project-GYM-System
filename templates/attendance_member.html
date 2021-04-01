@@ -1,0 +1,271 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Member Attendance
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='attend_member.css')}}" />
+<script src="/static/js/echarts.min.js"></script>
+
+{% endblock %}
+
+{% block manager %}
+<h2>Member Attndance</h2>
+<div id="smallbiv" class="outer clearfix">
+<div class="table_wrapper clearfix">
+    <table class="table total">
+        <thead>
+            <th><label for="select_year">Year</label>
+                <select name="" id="select_year">
+                    <option value="all">All</option>
+                </select> </th>
+            <th><label for="select_month">Month</label>
+                <select name="" id="select_month">
+                    <option value="all">All</option>
+                </select> </th>
+            <th>Total</th>
+        </thead>
+
+        {% for item in total_attend%}
+        <tr>
+            <td class="year">{{item[0]}} </td>
+            <td class="month">{{item[1]}} </td>
+            <td>{{item[2]}}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    <table class="table group">
+        <thead>
+
+            <th>Group Class</th>
+        </thead>
+
+        {% for item in group_attend%}
+        <tr>
+            <td class="year" hidden>{{item[0]}} </td>
+            <td class="month" hidden>{{item[1]}} </td>
+            <td>{{item[2]}}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+
+    <table class="table pt">
+        <thead>
+            <th>Personal Training</th>
+        </thead>
+
+        {% for item in pt_attend%}
+        <tr>
+            <td class="year" hidden>{{item[0]}} </td>
+            <td class="month" hidden>{{item[1]}} </td>
+            <td>{{item[2]}}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+</div>
+<div class="customised">
+    <form action="/attendance_review/member" method="POST">
+        <div>
+            <label for="start">Start Date: </label>
+            <input type="date" id="start" name="start" required value="{{cust[0]}}">
+            <button type="submit">Submit</button>
+        </div>
+        <div>
+            <label for="end">End Date: </label>
+            <input type="date" id="end" name="end" required value="{{cust[1]}}">
+
+        </div>
+        
+        
+        
+        
+    </form>
+    {% if cust %}
+    <table class="table">
+        <thead>
+            <th>Total</th> <th>Group Class</th> <th>Personal Training</th>
+        </thead>
+        <tr>
+            <td>{{cust[2]}}</td>
+            <td>{{cust[3]}}</td>
+            <td>{{cust[4]}}</td>
+        </tr>
+    
+    </table>
+    {% endif %}
+</div>
+
+</div>
+<div id="bigdiv">
+<h3>Group class Attendance</h3>
+<div id="mainlist" style="width: 40%;height:300px;"></div>
+	<script type="text/javascript">
+	var myChart = echarts.init(document.getElementById('mainlist'));
+    var column_list = {{gclassdate}} 
+    var data_list = {{gclassnum}}
+	var option = {
+				color: ['#a957a9'],
+				tooltip: {
+				trigger: 'axis',
+				axisPointer: {            
+				type: 'shadow'        
+				}
+			},
+
+                grid: {
+                       eft: '3%',
+                       right: '4%',
+                       bottom: '3%',
+                       containLabel: true
+                       },
+                xAxis: [
+                     {
+                        type: 'category',
+                        data: column_list,
+                        axisTick: {
+                              alignWithLabel: true
+                        }
+                      }	
+                    ],
+                yAxis: [
+                     {
+                        type: 'value'
+                     }
+                	],
+                series: [
+                      {
+                         type: 'bar',
+                         barWidth: '60%',
+                         data:data_list
+                      }
+                     ]
+                   };
+    
+      myChart.setOption(option);
+	</script>
+<h3>PT class Attendance</h3>
+<div id="mainlistt" style="width: 40%;height:300px;"></div>
+	<script type="text/javascript">
+	var myChart = echarts.init(document.getElementById('mainlistt'));
+    var column_list = {{gclassdatet}} 
+    var data_list = {{gclassnumt}}
+	var option = {
+				color: ['#a957a9'],
+				tooltip: {
+				trigger: 'axis',
+				axisPointer: {            
+				type: 'shadow'        
+				}
+			},
+
+                grid: {
+                       eft: '3%',
+                       right: '4%',
+                       bottom: '3%',
+                       containLabel: true
+                       },
+                xAxis: [
+                     {
+                        type: 'category',
+                        data: column_list,
+                        axisTick: {
+                              alignWithLabel: true
+                        }
+                      }	
+                    ],
+                yAxis: [
+                     {
+                        type: 'value'
+                     }
+                	],
+                series: [
+                      {
+                         type: 'bar',
+                         barWidth: '60%',
+                         data:data_list
+                      }
+                     ]
+                   };
+    
+      myChart.setOption(option);
+	</script>
+<div id="h3333">    
+<h3>Total Attendance</h3>
+</div>
+<div id="mainlistto" style="width: 60%;height:700px;"></div>
+	<script type="text/javascript">
+	var myChart = echarts.init(document.getElementById('mainlistto'));
+    var column_list = {{gclassdateto}} 
+    var data_list = {{gclassnumto}}
+	var option = {
+				color: ['#a957a9'],
+				tooltip: {
+				trigger: 'axis',
+				axisPointer: {            
+				type: 'shadow'        
+				}
+			},
+
+                grid: {
+                       eft: '3%',
+                       right: '4%',
+                       bottom: '3%',
+                       containLabel: true
+                       },
+                xAxis: [
+                     {
+                        type: 'category',
+                        data: column_list,
+                        axisTick: {
+                              alignWithLabel: true
+                        }
+                      }	
+                    ],
+                yAxis: [
+                     {
+                        type: 'value'
+                     }
+                	],
+                series: [
+                      {
+                         type: 'bar',
+                         barWidth: '60%',
+                         data:data_list
+                      }
+                     ]
+                   };
+    
+      myChart.setOption(option);
+	</script>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+ 
+    var select_year = document.getElementById('select_year')
+    var select_month = document.getElementById('select_month')
+    var years = document.getElementsByClassName('year');
+    var months = document.getElementsByClassName('month');
+    for (var i = 0; i < months.length; i++) {
+        months[i].innerHTML *= 1;
+    }
+
+    for (var i = 0; i < years.length; i++) {
+        years[i].innerHTML *= 1;
+    }
+    
+    insert_option(years, select_year);
+    insert_option(months, select_month);
+    
+    onchange_hidden(select_year,years)
+    onchange_hidden(select_month,months)
+
+</script>
+
+{% endblock %}

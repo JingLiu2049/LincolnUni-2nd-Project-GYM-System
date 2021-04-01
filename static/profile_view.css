@@ -1,0 +1,45 @@
+div.info_wrapper{
+    background:rgba(0, 0, 0, 0.15);
+    box-shadow:white 10px 10px 20px;
+    border-radius: 20px;
+    padding: 2% 5%;
+}
+img.photo{
+    float:right;
+    width: 25%;
+}
+ul.info{
+    float: left;
+    font-size: 1.5em;
+    width: 70%;
+}
+span.title{
+    display: inline-block;
+    width: 35%;
+}
+span.value{
+    display: inline-block;
+    text-transform: capitalize;
+    width: 30%;
+}
+div.button{
+    float: left;
+    margin: 1% auto;
+}
+div.notice{
+    font-size: 1.5em;
+    color: #ffce46;
+}
+div.attendance{
+    background:rgba(0, 0, 0, 0.15);
+    box-shadow:white 10px 10px 20px;
+    border-radius: 20px;
+    padding: 2% 5%;
+}
+.hidden{
+    display: none;
+}
+
+tr:last-of-type{
+    display: table-row;
+}

@@ -1,0 +1,30 @@
+{% extends "index_layout.html" %}
+{% block title %}
+Trainer Index
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='management_trainer.css')}}" />
+
+{% endblock %}
+
+{% block content %}
+
+<div class="brief clearfix">
+    <img src="../static/image/trainer1.jpg"class="photo" alt="photo" />
+    <ul class="brief">
+        <li><span class="title">Name:  </span> <span class="capital strong">{{info[1]}} {{info[2]}}</span></li>
+        <li><span class="title">Phone:  </span> <span class="capital">{{info[3]}}</span></li>
+        <li><span class="title">Email Address:  </span> <span class="capital">{{info[4]}}</span></li>
+    </ul>
+    
+</div>
+<hr>
+<div class="nav">  
+    <ul class="nav">
+        <li><a href="/profile" class="nav"><button type="button" class="btn btn-outline-dark">Personal Information</button></a></li>
+        <li><a href="/trainer/followed_members"class="nav"><button type="button" class="btn btn-outline-dark">Followed Members</button></a></li>
+    </ul>
+
+    
+
+{% endblock %}

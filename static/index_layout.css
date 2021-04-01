@@ -1,0 +1,114 @@
+body{
+    background-image: url(image/home_background.png);
+    background-size:cover;
+    width: 100vw;
+    
+}
+a{
+    text-decoration: none;
+}
+
+.clearfix::before, .clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+span.strong{
+    font-weight: bold;
+}
+nav.navbar{
+    padding-left: 5%;
+    padding-right: 1%;
+}
+form.search{
+    margin-right: 3%;
+}
+div.button{
+    width: 50%;
+    margin: 3% auto;
+}
+.capital{
+    text-transform: capitalize;
+}
+.center{
+    text-align: center;
+}
+.round{
+    border-radius: 25px;
+}
+div.name{
+    margin-right: 2%;
+}
+div.name span{
+    color: white;
+}
+li.top_slogen{
+    color: white;
+}
+p.message{
+    color: red;
+}
+div.manager_wrapper{
+    padding: 1% 1% 0 0;
+    min-width: 1500px;    
+}
+div.sdmenu {
+    margin-top:5rem;
+    float: left;
+	width: 12vw;
+    font-size: 0.9em;
+    border-bottom: 15px solid black;
+    border-radius: 5px;
+    min-width: 160px;
+}
+div.manager_content{
+    float: left;
+    width: 85vw;
+    overflow-y: auto;
+    height: 85vh;
+}
+div.sdmenu div {
+	overflow: hidden;
+    color: white;
+}
+div.sdmenu span.menuSpan{
+    background-color: black;
+}
+
+div.sdmenu div.collapsed {
+	height: 25px;
+}
+div.sdmenu div span {
+	display: block;
+	line-height: 15px;
+	overflow: hidden;
+	padding: 5px 25px;
+	font-weight: bold;
+	color: white;
+	background: url(image/expanded.gif) no-repeat 10px center;
+	cursor: pointer;
+}
+div.sdmenu div.collapsed span {
+	background-image: url(image/collapsed.gif);
+}
+div.sdmenu div a {
+	padding: 5px 10px;
+	background: rgba(238, 238, 238, 0.8);
+	display: block;
+	color: black;
+}
+div.sdmenu div a.current {
+	background: #ccc;
+}
+div.sdmenu div a:hover {
+	background: rgba(0, 0, 0, 0.5) url(image/linkarrow.gif) no-repeat right center;
+	color: #fff;
+	text-decoration: none;
+}
+
+
+.flash{
+    font-size: 1em;
+    color:rgb(209, 9, 9);
+
+}

@@ -1,0 +1,99 @@
+div.trainerupdate_manager{
+    width: 60%;
+    margin: 2% auto;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 3%;
+    border-radius: 25px;
+}
+div.insertmodule span{
+    padding:0.5rem;
+    width: 35%;
+    text-align: center;
+}
+
+.itemtitle {
+    display: flex;
+    align-items: center;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+div.insertmodule{
+    float:left;
+    width: 50%;
+    margin-top: 1%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+div.trainerupdate_manager input{
+    text-transform:capitalize;
+}
+
+div.button input{
+    margin-right: 5%;
+}
+div.button{
+    text-align: center;
+    width: 50%;
+    margin: 3% auto;
+    display: flex;
+}
+div.controldiv{
+    margin-top:3rem;
+    margin-right:auto;
+    margin-left:auto;
+    width:30%;
+}
+div.insertmodule >.insertbox{
+
+    position: relative;
+    flex: 1 1 auto;
+    width: 50%;
+    min-width: 0;
+    margin-right: 0.5rem;
+}
+
+.submitbutton{
+        color: #000;
+        background-color: #ffc107;
+        border-color: #ffc107;
+        margin-top:1rem;
+        margin-right:1rem;
+}
+.resetbutton{
+        color: #000;
+        background-color: #0dcaf0;
+        border-color: #0dcaf0;
+        margin-top: 1rem;
+        margin-right:1rem;
+        
+}
+.cancelbutton{
+    color: #000;
+    background-color: palegreen;
+    border-color: palegreen;
+    margin-top: 1rem;
+}
+div.sdmenu{
+    margin-top: 5rem;
+}
+
+div.manager_content > h1{
+    text-align: center;
+}
+.insertbox{
+    border: 1px solid #ced4da;
+}
+.insertbox:disabled, .insertbox[readonly]{
+    background-color: #e9ecef;
+}

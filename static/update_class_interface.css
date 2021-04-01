@@ -1,0 +1,17 @@
+div.classlist{
+    background-color: rgb(175, 173, 173, 0.7);
+    margin:50px 0 0 20px;
+}
+
+#class_search{
+    float:right;
+
+}
+
+table{
+    text-align: center;
+}
+
+h1{
+    margin: 0 0 0 20px;
+}

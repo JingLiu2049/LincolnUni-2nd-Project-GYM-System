@@ -1,0 +1,25 @@
+div.input-group span{
+    width: 30%;
+    text-align: center;
+}
+div.form_wrapper input{
+    text-transform:capitalize;
+}
+div.input-group{
+    margin-top: 1%;
+}
+div.form_wrapper{
+    width: 60%;
+    margin: 2% auto;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 3%;
+    border-radius: 25px;
+
+}
+div.button button{
+    width: 20%;
+    margin-right: 5%;
+}
+div.button{
+    text-align: center;
+}

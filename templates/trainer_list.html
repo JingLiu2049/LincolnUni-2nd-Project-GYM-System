@@ -1,0 +1,81 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='trainer_list.css')}}" />
+
+{% endblock %}
+
+{% block manager%}
+<div class="bigdiv">
+    <div class="header clearfix">
+        <h3>Lincoln GYM--trainer list</h3>
+        <div class="trainer_search">
+            <form action="/trainer_search_list" method="POST">
+                <input type="text" id="searchbox" name="searchbox" />
+                <input type="submit" id="mySearch" value="Search" />
+            </form>
+        </div>
+    </div>
+
+    {% for message in get_flashed_messages() %}
+
+    <div class=flash>{{ message }}</div>
+
+    {% endfor %}
+
+    <div id="trainerlist_manager">
+        <form action="/delete_trainer_interface" method="POST">
+            <table class="table table-hover">
+
+                <thead id="trainer_col">
+                    <tr>
+                        <th>Trainer ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+
+
+                <tbody id="trainer_content">
+                    {% for result in dbresult %}
+                    <tr>
+                        <td>{{result[0]}}</td>
+                        <td><a href="/profile?trainerid={{result[0]}}">{{result[1]}}</a> </td>
+                        <td> {{result[2]}} </td>
+                        <td>{{result[3]}}</td>
+                        <td>{{result[4]}}</td>
+                        <td>{{result[5]}}</td>
+                        <td><a href="/update_trainer_interface?correspondingid={{result[0]}}"><button
+                                    type="button">Update</button></a></td>
+                        <td class="delete"><button type="submit" value={{result[0]}}
+                                name="correspondingid_d">Delete</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+    </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript">
+
+    
+
+
+
+</script>
+
+{% endblock %}

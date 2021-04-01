@@ -1,0 +1,986 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='public_class_manager.css')}}" />
+
+{% endblock %}
+
+{% block manager %}
+<div class="bigdiv">
+<h3>Lincoln GYM--Public Class</h3>
+
+<div class="classdateshow">
+    <strong>{{ date.strftime("%A, %d %B, %Y") }}</strong>
+</div>
+
+<div class="inforboard">
+    <strong>Information Board</strong>
+</div>
+
+
+<form action="/public_class_manager" method="POST" >
+    <div class="control_pane">
+        <div class="sevendays_change">
+            <input type = "submit" id="lastinstruction" name="lastinstruction" value="last week"/>
+            <input type = "submit" id="nextinstruction" name="nextinstruction" value="next week"/>
+        </div>
+
+        <div class="searchdate_change">
+            <input type="date" placeholder="dd/mm/yy" id="dateinput" name="dateinput"/>
+        <input type="submit" id="searchbutton" value="Search"/>
+        </div>  
+    </div>
+    
+
+<div class="timetable">
+<table class="tabletime" >
+    <thead>
+      <tr class="tablehead" >
+        <th scope="col" class="tableheadcol">Time\Week</th>
+        <th scope="col" class="tableheadcol"><input type="hidden" id="firstdayweek" name="firstdayweek"  value="{{firstlist_weekday[0]}}">{{firstlist_weekday[0]}}</input><br/><input type="hidden" id="firstdaydate" name="firstdaydate"  value="{{firstlist[0]}}">{{firstlist[0]}}</input></th>
+        <th scope="col" class="tableheadcol"><input type="hidden" id="seconddayweek" name="seconddayweek"  value="{{firstlist_weekday[1]}}">{{firstlist_weekday[1]}}</input><br/><input type="hidden" id="seconddaydate" name="seconddaydate"  value="{{firstlist[1]}}">{{firstlist[1]}}</input></th>
+        <th scope="col" class="tableheadcol"><input type="hidden" id="thirddayweek" name="thirddayweek"  value="{{firstlist_weekday[2]}}">{{firstlist_weekday[2]}}</input><br/><input type="hidden" id="thirddaydate" name="thirddaydate"  value="{{firstlist[2]}}">{{firstlist[2]}}</input></th>
+        <th scope="col" class="tableheadcol"><input type="hidden" id="fourthdayweek" name="fourthdayweek"  value="{{firstlist_weekday[3]}}">{{firstlist_weekday[3]}}</input><br/><input type="hidden" id="fourthdaydate" name="fourthdaydate"  value="{{firstlist[3]}}">{{firstlist[3]}}</input></th>
+        <th scope="col" class="tableheadcol"><input type="hidden" id="fifthdayweek" name="fifthdayweek"  value="{{firstlist_weekday[4]}}">{{firstlist_weekday[4]}}</input><br/><input type="hidden" id="fifthdaydate" name="fifthdaydate"  value="{{firstlist[4]}}">{{firstlist[4]}}</input></th>
+        <th scope="col" class="tableheadcol"><input type="hidden" id="sixthdayweek" name="sixthdayweek"  value="{{firstlist_weekday[5]}}">{{firstlist_weekday[5]}}</input><br/><input type="hidden" id="sixthdaydate" name="sixthdaydate"  value="{{firstlist[5]}}">{{firstlist[5]}}</input></th>
+        <th scope="col" class="tableheadcol"><input type="hidden" id="seventhdayweek" name="seventhdayweek"  value="{{firstlist_weekday[6]}}">{{firstlist_weekday[6]}}</input><br/><input type="hidden" id="seventhdaydate" name="seventhdaydate"  value="{{firstlist[6]}}">{{firstlist[6]}}</input></th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr class="eight_nine">
+          <th scope="row" class="rowset">8:00-9:00</th>
+          
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day8 %}
+                  {%if classbasic[4] == '08:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement">
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day9 %}
+                  {%if classbasic[4] == '08:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day10 %}
+                  {%if classbasic[4] ==  '08:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+  
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day11 %}
+                  {%if classbasic[4] ==  '08:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day12 %}
+                  {%if classbasic[4] == '08:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day13 %}
+                    {%if classbasic[4] == '08:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+
+           <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] ==  day14 %}
+                    {%if classbasic[4] ==  '08:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+
+
+        </tr>
+  
+        <tr class="nine_ten">
+          <th scope="row" class="rowset">9:00-10:00</th>
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day8 %}
+                    {%if classbasic[4] == '09:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement">
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day9 %}
+                    {%if classbasic[4] == '09:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day10 %}
+                    {%if classbasic[4] ==  '09:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day11 %}
+                    {%if classbasic[4] ==  '09:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day12 %}
+                    {%if classbasic[4] == '09:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+
+            <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] == day13 %}
+                      {%if classbasic[4] == '09:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+
+             <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] ==  day14 %}
+                      {%if classbasic[4] == '09:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+        </tr>
+  
+        <tr class="ten_eleven">
+          <th scope="row" class="rowset">10:00-11:00</th>
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day8 %}
+                    {%if classbasic[4] == '10:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement">
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day9 %}
+                    {%if classbasic[4] == '10:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day10 %}
+                    {%if classbasic[4] ==  '10:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day11 %}
+                    {%if classbasic[4] == '10:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day12 %}
+                    {%if classbasic[4] == '10:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+
+            <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] == day13 %}
+                      {%if classbasic[4] == '10:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+
+             <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] ==  day14 %}
+                      {%if classbasic[4] ==  '10:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+        </tr>
+  
+        <tr class="eleven_twelve">
+          <th scope="row" class="rowset">11:00-12:00</th>
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day8 %}
+                    {%if classbasic[4] == '11:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement">
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day9 %}
+                    {%if classbasic[4] == '11:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day10 %}
+                    {%if classbasic[4] ==  '11:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day11 %}
+                    {%if classbasic[4] == '11:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day12 %}
+                    {%if classbasic[4] == '11:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+
+            <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] == day13 %}
+                      {%if classbasic[4] == '11:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+
+             <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] ==  day14 %}
+                      {%if classbasic[4] ==  '11:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+        </tr>
+  
+      <tr class="thirteen_fourteen">
+          <th scope="row" class="rowset">13:00-14:00</th>
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day8 %}
+                    {%if classbasic[4] == '13:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement">
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day9 %}
+                    {%if classbasic[4] == '13:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day10 %}
+                    {%if classbasic[4] ==  '13:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day11 %}
+                    {%if classbasic[4] == '13:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day12 %}
+                    {%if classbasic[4] == '13:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+
+            <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] == day13 %}
+                      {%if classbasic[4] == '13:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+
+             <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] ==  day14 %}
+                      {%if classbasic[4] ==  '13:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+      </tr>
+  
+      <tr class="fourteen_fiveteen">
+          <th scope="row" class="rowset">14:00-15:00</th>
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day8 %}
+                    {%if classbasic[4] == '14:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement">
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day9 %}
+                    {%if classbasic[4] == '14:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day10 %}
+                    {%if classbasic[4] ==  '14:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day11 %}
+                    {%if classbasic[4] == '14:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day12 %}
+                    {%if classbasic[4] == '14:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+
+            <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] == day13 %}
+                      {%if classbasic[4] == '14:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+
+             <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] ==  day14 %}
+                      {%if classbasic[4] == '14:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+      </tr>
+  
+      <tr class="fiveteen_sixteen">
+          <th scope="row" class="rowset">15:00-16:00</th>
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day8 %}
+                    {%if classbasic[4] == '15:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement">
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day9 %}
+                    {%if classbasic[4] == '15:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day10 %}
+                    {%if classbasic[4] == '15:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day11 %}
+                    {%if classbasic[4] == '15:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day12 %}
+                    {%if classbasic[4] == '15:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+
+            <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] == day13 %}
+                      {%if classbasic[4] == '15:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+
+             <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] ==  day14 %}
+                      {%if classbasic[4] == '15:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+      </tr>
+  
+      <tr class="sixteen_seventeen">
+          <th scope="row" class="rowset">16:00-17:00</th>
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day8 %}
+                    {%if classbasic[4] == '16:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement">
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day9 %}
+                    {%if classbasic[4] == '16:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day10 %}
+                    {%if classbasic[4] == '16:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day11 %}
+                    {%if classbasic[4] == '16:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+    
+            <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day12 %}
+                    {%if classbasic[4] == '16:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+            </td>
+
+            <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] == day13 %}
+                      {%if classbasic[4] == '16:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+
+             <td class = "divelement" >
+              {% for classbasic in class_basic_result %}
+                  {%if classbasic[1] ==  day14 %}
+                      {%if classbasic[4] == '16:00:00' %}                   
+                      <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                      {%endif%}
+                  {%endif%}
+              {%endfor%}    
+             </td>
+      </tr>
+
+    <tr class="seventeen_eightteen">
+        <th scope="row" class="rowset">17:00-18:00</th>
+        <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day8 %}
+                  {%if classbasic[4] == '17:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement">
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day9 %}
+                  {%if classbasic[4] == '17:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day10 %}
+                  {%if classbasic[4] == '17:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+  
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day11 %}
+                  {%if classbasic[4] == '17:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day12 %}
+                  {%if classbasic[4] == '17:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day13 %}
+                    {%if classbasic[4] == '17:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+
+           <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] ==  day14 %}
+                    {%if classbasic[4] == '17:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+    </tr>
+
+    <tr class="eightteen_nineteen">
+        <th scope="row" class="rowset">18:00-19:00</th>
+        <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day8 %}
+                  {%if classbasic[4] == '18:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement">
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day9 %}
+                  {%if classbasic[4] == '18:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day10 %}
+                  {%if classbasic[4] == '18:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+  
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day11 %}
+                  {%if classbasic[4] == '18:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day12 %}
+                  {%if classbasic[4] == '18:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day13 %}
+                    {%if classbasic[4] == '18:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+
+           <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] ==  day14 %}
+                    {%if classbasic[4] == '18:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+    </tr>
+
+    <tr class="nineteen_twenty">
+        <th scope="row" class="rowset">19:00-20:00</th>
+        <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day8 %}
+                  {%if classbasic[4] == '19:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a>  
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement">
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day9 %}
+                  {%if classbasic[4] == '19:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day10 %}
+                  {%if classbasic[4] == '19:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+  
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day11 %}
+                  {%if classbasic[4] == '19:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+  
+          <td class = "divelement" >
+          {% for classbasic in class_basic_result %}
+              {%if classbasic[1] == day12 %}
+                  {%if classbasic[4] == '19:00:00' %}                   
+                  <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                  {%endif%}
+              {%endif%}
+          {%endfor%}    
+          </td>
+
+          <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] == day13 %}
+                    {%if classbasic[4] == '19:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+
+           <td class = "divelement" >
+            {% for classbasic in class_basic_result %}
+                {%if classbasic[1] ==  day14 %}
+                    {%if classbasic[4] == '19:00:00' %}                   
+                    <a href= "/public_class_manager?compareid={{classbasic[3]}}"><button type="button" class="classbasiccss" >{{classbasic[0]}}</button></a> 
+                    {%endif%}
+                {%endif%}
+            {%endfor%}    
+           </td>
+    </tr>
+
+    
+  
+  
+  
+      </tbody>
+
+    </table>
+</div>
+
+
+  <div class = "detail_display clearfix">
+  
+      {% for message in get_flashed_messages() %}
+  
+      <div class=flash>{{ message }}</div>
+  
+      {% endfor %}
+  
+      <div id="groupclassid" class= "divtitle">
+          {% for detail_information in class_detail_information%}
+          <label for = "groupclassid" class ="divlab">Class ID: </label>
+          <input type = "hidden" id = "groupclassid" name = "groupclassid" class ="divinput">{{detail_information[0]}}</input> 
+          {% endfor %}
+      </div>
+  
+      <div id="groupclassname" class= "divtitle">     
+          {% for detail_information in class_detail_information%}
+          <label for = "groupclassname" class ="divlab">Class Name: </label>
+          <input type = "hidden" id = "groupclassname" name = "groupclassname" class ="divinput">{{detail_information[1]}}</input> 
+          {% endfor %}
+      </div>
+  
+      <div id="maxnumber" class= "divtitle">
+          {% for detail_information in class_detail_information%}
+          <label for = "maxnumber" class ="divlab">Max Number: </label>
+          <input type = "hidden" id = "maxnumber" name = "maxnumber" class ="divinput">{{detail_information[3]}}</input> 
+          {% endfor %}
+      </div>
+  
+      <div id="classlocation" class= "divtitle">
+          {% for detail_information in class_detail_information%}
+          <label for = "classlocation" class ="divlab">Location: </label>
+          <input type = "hidden" id = "classlocation" name = "classlocation" class ="divinput">{{detail_information[4]}}</input> 
+          {% endfor %}
+      </div>
+  
+      <div id="classdate" class= "divtitle">
+          {% for detail_information in class_detail_information%}
+          <label for = "classdate" class ="divlab">Class Date: </label>
+          <input type = "hidden" id = "classdate" name = "classdate" class ="divinput">{{detail_information[5]}}</input> 
+          {% endfor %}
+      </div>
+
+      <div id="classweekday" class= "divtitle">
+        {% for detail_information in class_detail_information%}
+        <label for = "classweekday" class ="divlab">Class Day: </label>
+        <input type = "hidden" id = "classweekday" name = "classweekday" class ="divinput">{{detail_information[6]}}</input> 
+        {% endfor %}
+      </div>
+
+      <div id="classstarttime" class= "divtitle">
+        {% for detail_information in class_detail_information%}
+        <label for = "classstarttime" class ="divlab">Class Start Time: </label>
+        <input type = "hidden" id = "classstarttime" name = "classstarttime" class ="divinput">{{detail_information[7]}}</input> 
+        {% endfor %}
+      </div>
+
+      <div id="classendtime" class= "divtitle">
+        {% for detail_information in class_detail_information%}
+        <label for = "classendtime" class ="divlab">Class End Time: </label>
+        <input type = "hidden" id = "classendtime" name = "classendtime" class ="divinput">{{detail_information[8]}}</input> 
+        {% endfor %}
+      </div>
+  
+  
+      <div id="classdescription" class= "divtitle">
+          {% for detail_information in class_detail_information%}
+          <label for = "classdescription" class ="divlab">Description: </label>
+          <input type = "hidden" id = "classdescription" name = "classdescription" class ="divinput">{{detail_information[2]}}</input> 
+          {% endfor %}
+      </div>
+  
+      <div id="trainername" class= "divtitle">
+          {% for detail_information in class_detail_information%}
+          <label for = "trainername" class ="divlab">Trainer Name: </label>
+          <input type = "hidden" id = "trainername" name = "trainername" class ="divinput">{{detail_information[9]}}</input> 
+          {% endfor %}
+      </div>
+  
+      <div id="traineremail" class= "divtitle">
+          {% for detail_information in class_detail_information%}
+          <label for = "traineremail" class ="divlab">Trainer E-mail: </label>
+          <input type = "hidden" id = "traineremail" name = "traineremail" class ="divinput">{{detail_information[10]}}</input> 
+          {% endfor %}
+      </div>
+  
+  </div>
+  
+<div class="aud">
+    <div class="linkbutton" id="addeditorlink">
+        <a href="{{ url_for('add_class_interface') }}" class="navbar-brand">Add New Class</a>  
+    </div>
+        
+    <div class="linkbutton" id="updateeditorlink">
+        <a href="{{ url_for('update_class_interface') }}" class="navbar-brand">Update Class</a>  
+    </div>
+
+    <div class="linkbutton" id="deletelink">
+        <a href="{{ url_for('delete_class_interface') }}" class="navbar-brand">Delete Now</a>  
+    </div>
+</div>
+</form>
+
+
+
+</div>
+{% endblock %}

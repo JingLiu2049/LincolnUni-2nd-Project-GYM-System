@@ -1,0 +1,196 @@
+{% extends "index_layout.html" %}
+{% block title %}
+ Profile Review
+{% endblock%}
+
+
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile_view.css')}}" />
+{% endblock %}
+
+{% block content %}
+<h2 class="container">Personal Information</h2>
+<div class="container clearfix info_wrapper">
+    
+    <div class="notice">
+        {% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+                    <p>{{ message }}</p>
+               {% endfor %}
+         {% endif %}
+        {% endwith %}
+    </div>
+    
+    <ul class="info">
+        <li><span class="title">ID:</span> <span class="value">{{profileinfo[0]}}</span></li>
+        <li><span class="title">First Name:</span> <span class="value">{{profileinfo[1]}}</span></li>
+        <li><span class="title">Last Name:</span> <span class="value">{{profileinfo[2]}}</span></li>
+        <li><span class="title">Phone Number:</span> <span class="value">{{profileinfo[3]}}</span></li>
+        <li><span class="title">Email Address:</span> <span class="value">{{profileinfo[4]}}</span></li>
+        <li><span class="title">Home Address:</span> <span class="value">{{profileinfo[5]}}</span></li>
+        <li><span class="title">Date of Birth:</span> <span class="value">{{profileinfo[6]}}</span></li>
+        <li><span class="title">Gender:</span> <span class="value">{{profileinfo[7]}}</span></li>
+        {% if usertype == "member" or viewer == "trainer" %}
+        <li><span class="title">Goles:</span> <span class="value">{{profileinfo[8]}}</span></li>
+        <li><span class="title">Medical Notes:</span> <span class="value">{{profileinfo[9]}}</span></li>
+        {% elif usertype == "trainer" or viewer == "member"%}
+        <li><span class="title">Speciality:</span> <span class="value">{{profileinfo[8]}}</span></li>
+        <li><span class="title">Years of Experience:</span> <span class="value">{{profileinfo[9]}}</span></li>
+        <li><span class="title">Certification:</span> <span class="value">{{profileinfo[10]}}</span></li>
+        <hr>
+        <li><span class="title">Bio:</span> <span class="value"></span></li>
+        {% endif%}
+    </ul>
+    <img src="../static/image/photosample.jpg" class="photo" alt="photo" />
+    <div class="button">
+        {% if viewer %}
+            {% if viewer == 'member' %}
+            <a href= "/pt_booking?trainerid={{trainerid}}" >
+                <button type="button" class="btn btn-outline-dark submit">Book Me</button>
+            </a>
+            {% endif %}
+
+         {% else %}
+        <a href="/profile/edit">
+            <button type="button" class="btn btn-outline-dark submit">Edit Personal Information</button>
+        </a>
+        {% endif %}
+        <a href="javascript:history.go(-1);">
+            <button type="button" class="btn btn-outline-dark submit">Cancel</button>
+        </a>
+        
+    </div>
+    
+    
+
+</div>
+{% if viewer == 'trainer' %}
+<h2 class="container">Member Attendance</h2>   
+
+<div class="attendance">
+    <select name="period" id="select">
+        <option value="3m" selected>3 Months</option>
+        <option value="6m">6 Months</option>
+        <option value="1y">1 Year</option>
+        <option value="all">All</option>
+    </select>
+    <table class="table attend" id="table">
+        <thead>
+             <th>In total</th> <th>Group Classes</th><th>Personal Training</th>
+        </thead>
+        {% for item in attendance%}
+        <tr class="hidden">
+           <td hidden class="option">{{item[0]}}</td><td>{{item[1]}}</td><td>{{item[2]}}</td><td>{{item[3]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block manager %}
+<h2 class="container">Personal Information</h2>
+<div class="container clearfix info_wrapper">
+    
+    <div class="notice">
+        {% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+                    <p>{{ message }}</p>
+               {% endfor %}
+         {% endif %}
+        {% endwith %}
+    </div>
+    
+    <ul class="info">
+        <li><span class="title">ID:</span> <span class="value">{{profileinfo[0]}}</span></li>
+        <li><span class="title">First Name:</span> <span class="value">{{profileinfo[1]}}</span></li>
+        <li><span class="title">Last Name:</span> <span class="value">{{profileinfo[2]}}</span></li>
+        <li><span class="title">Phone Number:</span> <span class="value">{{profileinfo[3]}}</span></li>
+        <li><span class="title">Email Address:</span> <span class="value">{{profileinfo[4]}}</span></li>
+        <li><span class="title">Home Address:</span> <span class="value">{{profileinfo[5]}}</span></li>
+        <li><span class="title">Date of Birth:</span> <span class="value">{{profileinfo[6]}}</span></li>
+        <li><span class="title">Gender:</span> <span class="value">{{profileinfo[7]}}</span></li>
+        {% if usertype == "member" or viewer == "trainer" %}
+        <li><span class="title">Goles:</span> <span class="value">{{profileinfo[8]}}</span></li>
+        <li><span class="title">Medical Notes:</span> <span class="value">{{profileinfo[9]}}</span></li>
+        {% elif usertype == "trainer" or viewer == "member"%}
+        <li><span class="title">Speciality:</span> <span class="value">{{profileinfo[8]}}</span></li>
+        <li><span class="title">Years of Experience:</span> <span class="value">{{profileinfo[9]}}</span></li>
+        <li><span class="title">Certification:</span> <span class="value">{{profileinfo[10]}}</span></li>
+        <hr>
+        <li><span class="title">Bio:</span> <span class="value"></span></li>
+        {% endif%}
+    </ul>
+    <img src="../static/image/photosample.jpg" class="photo" alt="photo" />
+    <div class="button">
+        {% if viewer %}
+            {% if viewer == 'member' %}
+            <a href= "/pt_booking?trainerid={{trainerid}}" >
+                <button type="button" class="btn btn-outline-dark submit">Book Me</button>
+            </a>
+            {% endif %}
+
+         {% else %}
+        <a href="/profile/edit">
+            <button type="button" class="btn btn-outline-dark submit">Edit Personal Information</button>
+        </a>
+        {% endif %}
+        <a href="javascript:history.go(-1);">
+            <button type="button" class="btn btn-outline-dark submit">Cancel</button>
+        </a>
+        
+    </div>
+    
+    
+
+</div>
+{% if viewer == 'trainer' %}
+<h2 class="container">Member Attendance</h2>   
+
+<div class="attendance">
+    <select name="period" id="select">
+        <option value="3m" selected>3 Months</option>
+        <option value="6m">6 Months</option>
+        <option value="1y">1 Year</option>
+        <option value="all">All</option>
+    </select>
+    <table class="table attend" id="table">
+        <thead>
+             <th>In total</th> <th>Group Classes</th><th>Personal Training</th>
+        </thead>
+        {% for item in attendance%}
+        <tr class="hidden">
+           <td hidden class="option">{{item[0]}}</td><td>{{item[1]}}</td><td>{{item[2]}}</td><td>{{item[3]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+{% block js %}
+<script type="text/javascript">
+    var select = document.getElementById('select');
+    var options = document.getElementsByClassName('option');
+    select.onchange = function(){
+        var period = select.value;
+        console.log(period, typeof(period));
+        for (var i =0; i< options.length;i++){
+            
+            if (period == options[i].textContent ){
+                options[i].parentElement.style.display = "table-row";
+            }else{
+                options[i].parentElement.style.display = "none";
+            }
+        }
+
+    }
+</script>
+
+{% endblock %}

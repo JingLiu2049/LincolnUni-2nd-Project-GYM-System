@@ -1,0 +1,89 @@
+{% extends "index_layout.html" %}
+
+{% block title %}Booking Confirmation{% endblock %}
+
+{% block head %}
+<script>
+  function booking_successful() {
+    let booking_successful = alert("Successfully booked");
+  }
+</script>
+{% endblock head %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col md-12">
+
+        <div class="jumbotron p-3">
+
+          <h3>Group Class Booking Confirmation</h3>
+            <p>Please confirm that you would like to book the following group class:</p>
+            <form action="/book_group_class/confirmation" method="POST">
+                
+                <input type="hidden" name="group_class_id" value="{{result[0]}}">
+
+                <div class="form-group row">
+                    <label for="group_class_date" class="col-sm-2 col-form-label">Day:</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="group_class_date" 
+                        name="group_class_date" value="{{result[1]}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="group_class_date" class="col-sm-2 col-form-label">Date:</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="group_class_date" 
+                        name="group_class_date" value="{{result[2]}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="group_class_time" class="col-sm-2 col-form-label">Time:</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="group_class_time" 
+                        name="group_class_time" value="{{result[3]}} to {{result[4]}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="group_class_name" class="col-sm-2 col-form-label">Group Class Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="group_class_name" 
+                        name="group_class_name" value="{{result[5]}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="location" class="col-sm-2 col-form-label">Location:</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="location" 
+                        name="location" value="{{result[6]}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="trainer" class="col-sm-2 col-form-label">Trainer:</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="trainer" 
+                        name="trainer" value="{{result[7]}} {{result[8]}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button class="btn btn-primary" onclick="booking_successful()" type="submit" id="booking_status" name="booking_status" value="booked">OK</button>
+                        <a class="btn btn-primary" href="/book_group_class/" type="cancel" role="button">Cancel</a>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+      </div>
+    </div> 
+</div>
+
+{% endblock content %}

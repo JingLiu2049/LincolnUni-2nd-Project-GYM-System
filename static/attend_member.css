@@ -1,0 +1,78 @@
+
+div.table_wrapper{
+    border-right: 1px solid black;
+    width: 600px;
+    float: left;
+
+}
+table.group{
+    float: left;
+    width: 130px;
+}
+table.pt{
+    float: left;
+    width: 168px;
+}
+table.total{
+    float: left;
+    width: 300px;
+}
+.display{
+    display: table-row;
+}
+.hidden{
+    display: none;
+}
+div.customised{
+    float: left;
+
+}
+
+div.customised td{
+    width: 120px;
+}
+div.outer{
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#mainlistto{
+    float:right;
+    margin:-690px 50px 0 0;
+    
+}
+
+#smallbiv{
+    background-color: rgba(153, 148, 148, 0.6);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin:10px 20px 10px 20px;
+}
+
+h2{
+    margin:0 0 0 20px; 
+}
+
+#bigdiv{
+    background-color: rgb(0, 0, 0, 0.8);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin:0 20px 0 20px;
+}
+
+#h3333{
+    float:right;
+    margin:-680px 600px 0 0;
+}
+
+h3{
+    color:antiquewhite;
+}
+
+

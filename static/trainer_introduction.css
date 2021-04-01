@@ -1,0 +1,42 @@
+div.brief{
+    background-color: rgba(229, 230, 229, 0.7);
+    margin: 2% auto;
+    padding: 2%;
+    border-radius: 25px;
+}
+img.avatar{
+    width: 100%;
+}
+div.photo{
+    float: left;
+    background-color: #bfa;
+    width: 26%;
+}
+div.bio{
+    float: left;
+    width: 40%;
+    padding: 2%;
+}
+div.book{
+    float: right;
+    width: 30%;
+    padding-top: 2%;
+}
+div.book button{
+    display: block;
+    width: 70%;
+    margin: 0 auto 10%;
+}
+div.bio span{
+    display: inline-block;
+}
+span.title{
+    width: 30%;
+}
+h2{
+    text-align: center;
+    margin: 2% auto;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 1% 0 ;
+}

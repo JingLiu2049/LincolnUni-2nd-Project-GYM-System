@@ -1,0 +1,29 @@
+span.input-group-text{
+    width: 20%;
+}
+div.manager_content {
+    float: left;
+    width: 85vw;
+    overflow-y: auto;
+    height: 85vh;
+    margin-top: 5rem;
+}
+.btn-warning {
+    color: #000;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    margin-left: 5rem;
+    margin-right: 2rem;
+}
+.btn-info {
+    color: #000;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+    margin-right: 2rem;
+}
+.btn-cancel{
+    color: #000;
+    background-color: palegreen;
+    border-color: palegreen;
+    margin-right: 2rem;
+}

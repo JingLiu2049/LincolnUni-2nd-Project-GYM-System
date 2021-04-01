@@ -1,0 +1,9 @@
+.hidden{
+    display: none;
+}
+div.outer{
+    position: relative;
+}
+.table{
+    margin-top: 3rem;
+}

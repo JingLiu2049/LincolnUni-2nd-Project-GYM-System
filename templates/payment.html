@@ -1,0 +1,88 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='refund.css')}}" />
+{% endblock %}
+
+{% block content %}
+<form class="payment" action="/payment" method="POST">
+   
+<h3>Personal Training Booking Confirmation</h3>
+    <div>
+        {% for item in payinfos %}
+            <div class="table_wrapper">
+            <table class="table">
+                <tr>
+                    <td><span>Trainer</span></td> <td><span class="capital">{{item[9]}} {{item[10]}}</span></td>
+                </tr>
+                <tr>
+                    <td><span>Session Time</span></td> <td><span class="capital">{{item[7]}}, {{item[13]}}, {{item[8]}}</span></td>
+                </tr>
+                <tr>
+                    <td><span>Session Cost</span></td> <td>$<span class="deal"> {{item[12]}} </span></td>
+                </tr>
+                <input type="text" name="{{item[0]}}" id="" value="{{item[12]}}" hidden>
+                
+    
+        </table>
+        </div>
+         <hr>
+    
+        {% endfor %}
+        </div>
+
+        <div><span>Total Amount: <span id="show_amount"></span ></span></div>
+        <input type="text" id="cancel" hidden name="cancel">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container button">
+    
+        <button type="submit" class="btn btn-outline-dark submit">Submit</button>
+        
+        <button type="submit" class="btn btn-outline-dark submit" id="cancle_payment">Cancel</button>
+        
+        
+    </div>
+
+</form>
+
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    var btn = document.getElementById('cancle_payment');
+    var cancel = document.getElementById('cancel');
+    btn.onclick = function(){
+        cancel.value = 'cancel';
+        console.log(cancel.value)
+
+
+    }
+    var amounts = document.getElementsByClassName('deal');
+    var show_amount = document.getElementById('show_amount');
+    var number = 0;
+    for (var i =0; i < amounts.length; i++){
+        content = amounts[i].textContent
+        number += content*1;
+    }
+    console.log(number, typeof(number));
+    show_amount.innerHTML = "$ " + number.toFixed(1);
+
+
+</script>
+{% endblock %}

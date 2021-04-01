@@ -1,0 +1,63 @@
+{% extends "index_layout.html" %}
+
+{% block title %}Book Class{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col md-12">
+
+        <div class="jumbotron p-3">
+
+          <h3>Book Class</h3>
+
+          <form action="/book_class/" method="GET">
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>{{ dbcols[5].title() }}</th>
+                <th>{{ dbcols[6].title() }}</th>
+                <th>{{ dbcols[7].title() }}</th>
+                <th>Availability</th>
+                <th></th>
+
+              </tr>
+            </thead>
+          {# this is a comment the line below prints the db result #}
+          <tbody>
+            {% for result in dbresult %}
+            <tr>
+                <td>{{result[1]}}</td>
+                <td>{{result[2]}}</td>
+                <td>{{result[3]}} - {{result[4]}}</td>
+                <td>{{result[5]}}</td>
+                <td>{{result[6]}}</td>
+                <td>{{result[7]}} {{result[8]}}</td>   
+                <td>{{result[9]}}/30 Spaces available</td>                   
+                <td>
+                  {% if result[0] in fully_booked_classes_id %}
+                  <a value="{{result[0]}}" class="btn btn-dark" >Fully Booked</a> 
+                  {% elif result[0] in confirmed_booked_classes_id %}                
+                  <a value="{{result[0]}}" href="/booked_class" class="btn btn-dark" role="button">Booked</a>                   
+                  {% else %}  
+                  <a value="{{result[0]}}" href="/book_group_class/confirmation?group_class_id={{result[0]}}" class="btn btn-dark" role="button">Book</a>
+                  {% endif %}
+                </td>
+            </tr>
+            
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        </form>
+
+        </div>
+      </div>
+    </div> 
+</div>
+
+{% endblock content %}

@@ -1,0 +1,132 @@
+{% extends "index_layout.html" %}
+{% block title %}
+
+{% endblock%}
+
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='refund.css')}}" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<h3>Refunding Information</h3>
+<form class="payment" action="/refund" method="POST">
+    {% if full_refunds %}
+    <div class="full">
+    {% for item in full_refunds %}
+    <div class="table_wrapper">
+        <table class="table">
+        <tr>
+            <td><span>Trainer</span></td> <td><span class="capital">{{item[9]}} {{item[10]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Booking Date</span></td> <td><span>{{item[3]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Session Time</span></td> <td><span>{{item[7]}} {{item[8]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Payed</span></td> <td><span>$ {{item[12]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Refund amount</span></td> <td>$ <span class="refund">{{item[14]}}</span></td>
+        </tr>
+        <input type="text" name="amount" id="" value="{{item[0]}} {{item[14]}}" hidden>
+
+    </table>
+    </div>
+     <hr> 
+
+    {% endfor %}
+    </div>
+    {% endif %}
+
+
+    {% if half_refunds %}
+    <div class="half">
+    {% for item in half_refunds %}
+    <div class="table_wrapper">
+        <table class="table">
+        <tr>
+            <td><span>Trainer</span></td> <td><span class="capital">{{item[9]}} {{item[10]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Booking Date</span></td> <td><span>{{item[3]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Session Time</span></td> <td><span>{{item[7]}} {{item[8]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Payed</span></td> <td><span>$ {{item[12]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Refund amount</span></td> <td>$ <span class="refund">{{item[14]}}</span></td>
+        </tr>
+        <input type="text" name="amount" id="" value="{{item[0]}} {{item[14]}}" hidden>
+
+    </table>
+    </div>
+     <hr>
+
+    {% endfor %}
+    </div>
+    {% endif %}
+    
+
+    {% if no_refunds %}
+    <div class="no">
+    {% for item in no_refunds %}
+        <div class="table_wrapper">
+        <table class="table">
+        <tr>
+            <td><span>Trainer</span></td> <td><span class="capital">{{item[9]}} {{item[10]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Booking Date</span></td> <td><span>{{item[3]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Session Time</span></td> <td><span>{{item[7]}} {{item[8]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Payed</span></td> <td>$<span> {{item[12]}}</span></td>
+        </tr>
+        <tr>
+            <td><span>Refund amount</span></td> <td><span class="refund">$ {{item[14]}}</span></td>
+        </tr>
+        <input type="text" name="amount" id="" value="{{item[0]}} {{item[14]}}" hidden>
+
+    </table>
+    </div>
+     <hr>
+
+    {% endfor %}
+    </div>
+    {% endif %}
+    <div><span>Total Refunding Amount: <span id="show_amount"></span ></span></div>
+
+    <button type="submit" class="btn btn-outline-dark submit">Accept</button>
+        
+    <a href="/booked_class" ><button type="button" class="btn btn-outline-dark">Cancel</button></a>
+
+
+
+    
+</form>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    var amounts = document.getElementsByClassName('refund');
+    var show_amount = document.getElementById('show_amount');
+    var number = 0;
+    for (var i =0; i < amounts.length; i++){
+        content = amounts[i].textContent
+        number += content*1;
+    }
+    console.log(number, typeof(number));
+    show_amount.innerHTML = "$ " + number.toFixed(1);
+
+    
+
+</script>
+{% endblock %}

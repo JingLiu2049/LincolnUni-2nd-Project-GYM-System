@@ -1,0 +1,32 @@
+h1{
+    color: rgb(235, 201, 11);
+    font-size: 5em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-image: url(image/h1background.jpg);
+    background-size:cover;
+}
+
+body{
+    background-image: url(image/home_background.png);
+    background-size:cover;
+}
+a{
+    text-decoration: none;
+}
+div.topbar{
+    background-color: #212529;
+    color: white;
+    line-height: 3em;
+    padding: 0 4%;
+}
+#logout{
+    float: right;
+}
+.clearfix::before, .clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+span.strong{
+    font-weight: bold;
+}

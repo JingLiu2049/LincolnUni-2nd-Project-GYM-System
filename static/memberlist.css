@@ -1,0 +1,49 @@
+div.bigdiv{
+    background-color: rgba(0, 0, 0, 0.15);
+    margin:50px 0 0 20px;
+    border-radius: 25px;
+    width: 100%;
+
+}
+table tbody.member_content {
+    display:block;
+    height:65vh;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch;
+    word-break: break-all;
+    text-align: center; 
+    
+}
+
+/* table tbody::-webkit-scrollbar {
+    display: none; 
+} */
+
+table thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    word-break: break-all; 
+    text-align: center;
+}
+
+table thead {
+    width: 77%;
+    word-break: break-all;
+    text-align: center;
+    font-size: 1rem; 
+    font-weight: 600;
+}
+table thead th{ background:#ccc;}
+div.member_search{
+    float: right;
+    margin:0 60px 0 0;
+}
+div.header h3{
+    float: left;
+    width: 50%;
+    margin-left: 0.5rem;
+}
+div.sdmenu{
+    margin-top: 5rem;
+}
