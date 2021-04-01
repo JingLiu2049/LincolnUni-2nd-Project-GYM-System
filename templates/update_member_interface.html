@@ -79,7 +79,11 @@
             </div>
             <div id="user_type_input" class="input-group">
                 <span for = "user_type_update" class="input-group-text">{{dbcols_update[12]}}: </span>
-                <input type = "text" id = "user_type_update" name = "user_type_update" class = "form-control"  required="required"  value={{result_update[12]}} maxlength="15"></input> 
+
+                <select name="user_type_update" id="user_type_update" class = "form-control capital"  required="required"  >
+                    <option value="{{result_update[12]}}" id="user_type_default"> {{result_update[12]}}</option>
+                </select>
+
             </div>
             <div id="password_input" class="input-group">
                 <span for = "password_update" class="input-group-text">{{dbcols_update[13]}}: </span>
@@ -107,19 +111,27 @@
 {% block js %}
     <script type="text/javascript">
 
-       var select = document.getElementById('membership_type_update');
-       var option = document.getElementById('default_type');
-       var list = ['weekly','monthly','yearly'];
-       test(option.textContent)
-       for (var i=0;i<list.length;i++){
-            if (list[i] != option){
+       var option_ms = document.getElementById('default_type');
+       var list_ms = ['weekly','monthly','yearly'];
+       var option_user = document.getElementById('user_type_default');
+       var list_user =['member','trainer','manager'];
+
+       function insert_option(option, list){
+        for (var i=0;i<list.length;i++){
+            if (list[i] != option.value){
                 var new_opt = document.createElement("option");
                 new_opt.innerHTML = list[i];
+                new_opt.value = list[i]
                 option.parentElement.appendChild(new_opt)
-
             }
        }
-       test()
+       }
+       
+
+
+       insert_option(option_ms, list_ms)
+       insert_option(option_user, list_user)
+
     </script>
 
 

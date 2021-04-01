@@ -238,7 +238,7 @@ def add_member_interface():
         cur.execute(sql)
         flash("Successfully!  You have added %s !" % (memberfirstname_given,))
         return redirect(url_for('member_list' ))
-    return render_template('addnewmember.html', usertype = session['usertype'], name = session['name'],today = dt.datetime.today())
+    return render_template('addnewmember.html', usertype = session['usertype'], name = session['name'])
 
 @app.route("/update_member_interface", methods = ['GET','POST'])  #this part is for update trainer.
 def update_member_interface():
@@ -256,8 +256,9 @@ def update_member_interface():
         membermedicalnotes_given1= request.form.get('medical_notes_update')
         memberphonto_given1= request.form.get('photo_url_update')
         membertype_given1=request.form.get('user_type_update')
+        test(membertype_given1,'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
         membermembership_given1=request.form.get('membership_type_update')
-        print(membermembership_given1)
+        print(membermembership_given1,'sssssssssssssssssssssssssssssssssssssss')
         memberpassword_given1=request.form.get('password_update')
         print(memberpassword_given1)
         cur = getCursor()
