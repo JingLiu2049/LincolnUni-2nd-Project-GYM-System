@@ -29,13 +29,13 @@
 
         <div class="searchdate_change">
             <input type="date" placeholder="dd/mm/yy" id="dateinput" name="dateinput"/>
-        <input type="submit" id="searchbutton" value="Search"/>
+            <input type="submit" id="searchbutton" value="Search"/>
         </div>  
     </div>
     
 
 <div class="timetable">
-<table class="tabletime" >
+<table class="table table-dark table-hover" >
     <thead>
       <tr class="tablehead" >
         <th scope="col" class="tableheadcol">Time\Week</th>
@@ -967,15 +967,15 @@
   
 <div class="aud">
     <div class="linkbutton" id="addeditorlink">
-        <a href="{{ url_for('add_class_interface') }}" class="navbar-brand">Add New Class</a>  
+        <strong><a href="{{ url_for('add_class_interface') }}" class="navbar-brand">Add New Class</a></strong>
     </div>
         
     <div class="linkbutton" id="updateeditorlink">
-        <a href="{{ url_for('update_class_interface') }}" class="navbar-brand">Update Class</a>  
+        <strong><a href="{{ url_for('update_class_interface') }}" class="navbar-brand">Update Class</a></strong>  
     </div>
 
     <div class="linkbutton" id="deletelink">
-        <a href="{{ url_for('delete_class_interface') }}" class="navbar-brand">Delete Now</a>  
+        <strong><a href="{{ url_for('delete_class_interface') }}" class="navbar-brand">Delete Class</a></strong>  
     </div>
 </div>
 </form>
