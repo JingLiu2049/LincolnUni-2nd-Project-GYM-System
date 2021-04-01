@@ -112,3 +112,21 @@ div.sdmenu div a:hover {
     color:rgb(209, 9, 9);
 
 }
+
+table{
+    margin-left: 1%;
+
+}
+
+table thead{
+    text-align: center;
+}
+
+table tbody{
+
+    text-align: center;
+}
+
+td:hover{
+    color:rgb(204, 70, 70);
+}
