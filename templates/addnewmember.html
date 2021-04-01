@@ -52,7 +52,7 @@
 
         <div id="gender_member" class="insertmodule">
             <span for="gender_member" class="itemtitle">Gender: </span>
-            <select id="gender_member" name="gender_member" class="insertbox" required="required">
+            <select id="gender_member" name="gender_member" class="insertbox capital" required="required">
                 <option value="male">male</option>
                 <option value="female">female</option>
             </select>
@@ -75,7 +75,7 @@
 
         <div id="usertype_member" class="insertmodule">
             <span for="usertype_member" class="itemtitle">User Type: </span>
-            <select id="usertype_member" name="usertype_member" class="insertbox" required="required">
+            <select id="usertype_member" name="usertype_member" class="insertbox capital" required="required">
                 <option value="member">member</option>
                 <option value="trainer">trainer</option>
                 <option value="manager">manager</option>
@@ -85,6 +85,23 @@
         <div id="password_member" class="insertmodule">
             <span for="password_member" class="itemtitle">Password: </span>
             <input type="text" id="password_member" name="password_member" class="insertbox" required="required" maxlength="10"/>
+        </div>
+        <div id="joindate" class="insertmodule">
+            <span for="joindate" class="itemtitle">Join Date: </span>
+            <input type="date" id="joindate" name="joindate" class="insertbox"/>
+        </div>
+        <div id="type" class="insertmodule">
+            <span for="type" class="itemtitle">Member Type </span>
+            <select name="type" id="type" class="insertbox">
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+
+            </select>
+        </div>
+        <div id="quantity" class="insertmodule">
+            <span for="quantity" class="itemtitle">Initial Period </span>
+            <input type="number" id="quantity" name="quantity" class="insertbox" />
         </div>
 
         <div class="button">

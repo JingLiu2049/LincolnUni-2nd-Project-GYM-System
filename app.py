@@ -9,6 +9,8 @@ import re
 from datetime import datetime, timedelta, date 
 from dateutil.relativedelta import *
 from flask_mail import Mail, Message
+
+
 # from userimg import insert_userimg   
 
 
@@ -207,20 +209,36 @@ def add_member_interface():
         membertype_given=request.form.get('usertype_member')
         # membermembership_given=request.form.get('membership_member')
         memberpassword_given=request.form.get('password_member')
-        returnbutton_given = request.args.get('returnid')
-        print(returnbutton_given)
-        if returnbutton_given == 'return':
-            return redirect(url_for('member_list' ))
+        # returnbutton_given = request.args.get('returnid')
+        join_date = request.form.get('joindate')
+        member_type = request.form.get('type')
+        quantity = int(request.form.get('quantity'))
+        test(join_date,'6666666666666666666666666666666666')
+        if member_type == 'weekly':
+            duedate = datetime.strptime(join_date, '%Y-%m-%d')  + relativedelta(weeks=quantity)
+        elif member_type == 'monthly':
+            duedate = datetime.strptime(join_date, '%Y-%m-%d')  + relativedelta(months=quantity)
+        elif member_type == 'yearly':
+            duedate = datetime.strptime(join_date, '%Y-%m-%d')  + relativedelta(years=quantity)
+            
+        test(duedate,'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
+        # print(returnbutton_given)
+        # if returnbutton_given == 'return':
+        #     return redirect(url_for('member_list' ))
         cur = getCursor()
         cur.execute("INSERT INTO authorisation VALUES (nextval('mem_id_seq'), %s, %s) \
             RETURNING user_id;",(memberpassword_given, membertype_given,))
         userid = cur.fetchone()[0]
         print(userid,type(userid),'ooooooooooooooooooooooooooooooooooooooooooooooooooo')
-        cur.execute("INSERT INTO member VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);", (userid,memberfirstname_given,memberlastname_given,memberphone_given,memberemail_given,memberaddress_given,memberbirthday_given,membergender_given,membergoals_given,membermedicalnotes_given,memberphonto_given,))     
-        session['successs'] = True
+        cur.execute("INSERT INTO member VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);", (
+            userid,memberfirstname_given,memberlastname_given,memberphone_given,memberemail_given,
+            memberaddress_given,memberbirthday_given,membergender_given,membergoals_given,
+            membermedicalnotes_given,memberphonto_given,))  
+        sql = "INSERT INTO membership VALUES (%s, '%s', null, '%s', 'active', '%s', 0,0)" %(userid, member_type,join_date,duedate)   
+        cur.execute(sql)
         flash("Successfully!  You have added %s !" % (memberfirstname_given,))
         return redirect(url_for('member_list' ))
-    return render_template('addnewmember.html', usertype = session['usertype'], name = session['name'])
+    return render_template('addnewmember.html', usertype = session['usertype'], name = session['name'],today = dt.datetime.today())
 
 @app.route("/update_member_interface", methods = ['GET','POST'])  #this part is for update trainer.
 def update_member_interface():
@@ -892,9 +910,6 @@ def public_class_manager():
         # search_weekday_str = request.form.get('weekoutput')
         print(search_date_str)
         print(type(search_date_str))
-        # print(search_weekday_str)
-        # print(type(search_weekday_str))
-
         #next/last button
         lsatbutton=request.form.get('lastinstruction')
         nextbutton=request.form.get('nextinstruction')
@@ -1591,7 +1606,6 @@ def profile_edit():
                 EXCLUDED.certification, photo_url = EXCLUDED.photo_url" % (int(form['memberid']), (form['firstname']),
                 form['lastname'],form['phone'],email, form['address'], form['birthday'], form['gender'],
                 form['speciality'],form['experience'],form['certification'],form['photo'])
-        #     sql = 'SELECT * FROM member WHERE member_id = %s;' % userid
 
         cursor.execute(sql)
         if usertype =='manager' and form['edit'] == 'member':
@@ -1661,19 +1675,14 @@ def member():
 
     groups = cursor.fetchall()  
     now = time.time()  
-    ########### test use 
-    # now = time.mktime(time.strptime("2021-03-19 00:00:00","%Y-%m-%d %H:%M:%S")) 
     booked_groups = []
     for item in groups:
         class_time = time.strptime(f'{item[8]} {item[10]}',"%Y-%m-%d %H:%M:%S")
         timestamp = time.mktime(class_time)
         if now < timestamp:
             booked_groups.append(item)
-    # active after test
     cursor.execute("select * from booked_pt WHERE user_id= %s AND pt_class_date = \
             current_date AND (booking_status = 'payed' OR booking_status IS null);",(userid,))   
-    ########      test use  ########## 
-    # cursor.execute("select * from booked_pt WHERE user_id= %s AND (booking_status ='payed' OR booking_status IS null) AND pt_class_date = '2021-03-19';",(userid,)) 
     pts = cursor.fetchall()  
     booked_pts = []
     for item in pts:
@@ -1830,17 +1839,9 @@ def pt_booking():
         return redirect(url_for('payment'))
     else:
         trainerid = int(request.args.get('trainerid'))
-        ###### active after test
         sql = "SELECT *, EXTRACT (MONTH from pt_class_date) AS pt_month FROM pt_class \
             WHERE user_id = %s AND pt_class_date >= current_date\
             ORDER BY pt_class_date, pt_class_time;" % trainerid
-
-        ############## test use
-        # text_time = dt.datetime.strptime('2021-3-19', '%Y-%m-%d')
-        # sql = "SELECT *, EXTRACT (MONTH from pt_class_date) AS pt_month FROM pt_class \
-        #     WHERE user_id = %s AND pt_class_date >= '%s'ORDER BY pt_class_date, pt_class_time;\
-        #     " % (trainerid,text_time)
-        
         cursor.execute(sql)
         pt_info = cursor.fetchall()
         cursor.execute("SELECT pt_class_id FROM pt_booking WHERE booking_status = 'payed';")
@@ -1933,7 +1934,6 @@ def booked_class():
                 cancel_date = %s WHERE group_booking_id = %s; ", (date, groupid))
         if ptids:
             now_date = dt.datetime.now()
-            # now = time.time()  
             now = time.mktime(time.strptime("2021-03-19 00:00:00","%Y-%m-%d %H:%M:%S")) 
             full_refunds = []
             half_refunds = []
@@ -1972,30 +1972,16 @@ def booked_class():
             (booking_status != 'canceled' OR booking_status IS  NULL) ORDER BY to_date\
             (group_class_date, 'yyyy-mm-dd') DESC;",(userid,)) 
         groups = cursor.fetchall()  
-        #active after test
         now = time.time()  
-        ########### test use 
-        # now = time.mktime(time.strptime("2021-03-19 00:00:00","%Y-%m-%d %H:%M:%S")) 
         booked_groups = []
         for item in groups:
             class_time = time.strptime(f'{item[8]} {item[10]}',"%Y-%m-%d %H:%M:%S")
             timestamp = time.mktime(class_time)
             if now < timestamp:
                 booked_groups.append(item)
-
         column_names1 = [desc[0] for desc in cursor.description]
-
-
-        # active after test
         cursor.execute("select * from booked_pt WHERE user_id= %s AND pt_class_date >= \
             current_date AND (booking_status = 'payed' OR booking_status IS null);",(userid,))
-
-
-        # test use ###############
-        # text_time = dt.datetime.strptime('2021-3-19', '%Y-%m-%d')
-        # sql = "select * from booked_pt WHERE user_id= %s AND pt_class_date >= \
-        #     '%s' AND (booking_status = 'payed' OR booking_status IS null);" % (userid,text_time)
-        # cursor.execute(sql)
         booked_pts = cursor.fetchall()  
         
         test(booked_pts,'6666666666666666666666666666666666')
