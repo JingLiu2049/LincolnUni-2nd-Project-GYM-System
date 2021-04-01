@@ -33,12 +33,14 @@
     <div class="memberlist_manager">
 
 
-        <table id="listtable" class="table table-dark table-hover">
+        <table id="listtable" class="table table-hover">
             <thead class="member_col">
                 <tr>
                     {% for col in dbcols %}
                     <th class="capital">{{col}}</th>
                     {% endfor %}
+                    <th class="capital">Option</th>
+                    <th class="capital">Option</th>
                 </tr>
             </thead>
 

@@ -28,13 +28,14 @@ table thead, tbody tr {
 }
 
 table thead {
-    width: 77%;
+    width: 99%;
     word-break: break-all;
     text-align: center;
     font-size: 1rem; 
     font-weight: 600;
 }
-table thead th{ background:#ccc;}
+table thead th{ 
+    background:#ccc;}
 div.member_search{
     float: right;
     margin:0 60px 0 0;
