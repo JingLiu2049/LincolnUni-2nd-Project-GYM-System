@@ -1,7 +1,4 @@
-div.classlist{
-    background-color: rgb(175, 173, 173, 0.7);
-    margin:50px 0 0 20px;
-}
+
 
 #class_search{
     float:right;
@@ -9,6 +6,7 @@ div.classlist{
 }
 
 table{
+    margin:50px 0 0 20px;
     text-align: center;
 }
 

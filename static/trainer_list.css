@@ -25,7 +25,7 @@ table thead, tbody tr {
 }
 
 table thead {
-    width: 75%;
+    width: 100%;
     word-break: break-all;
     text-align: center;
     font-size: 1rem; 

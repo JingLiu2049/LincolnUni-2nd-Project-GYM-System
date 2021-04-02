@@ -5,6 +5,7 @@
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius:10px ;
+
 }
 
 
@@ -19,10 +20,14 @@
     width:50%;
     padding:10px;
     margin:400px -500px 0 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius:10px ;
 }
 
 .infordisplay{
-    background: rgba(136, 131, 131, 0.7);
+
     margin:10px 0 0 0;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
