@@ -9,6 +9,10 @@ import re
 from datetime import datetime, timedelta, date 
 from dateutil.relativedelta import *
 from flask_mail import Mail, Message
+import smtplib
+ 
+
+
 
 
 # from userimg import insert_userimg   
@@ -19,18 +23,16 @@ from flask_mail import Mail, Message
 app = Flask(__name__)
 app.secret_key = 'project1_group2'
 
-# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-# app.config['MAIL_PORT'] = 587
-# app.config['MAIL_USE_TLS'] = True
-# app.config['MAIL_USERNAME'] = 'finn.he0102@gmail.com'
-# app.config['MAIL_PASSWORD'] = 'xxxxxxx'   # if you want to use it, please change the less security setting in google account and insert password here
 
-
+app.config['MAIL_DEBUG'] = True
+app.config['MAIL_SUPPRESS_SEND'] = False
+app.config['TESTING'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'esangkop@gmail.com'
-app.config['MAIL_PASSWORD'] = 'xxxxxxxxx'   # if you want to use it, please change the less security setting in google account and insert password here
+app.config['MAIL_PASSWORD'] = 'Flagpole89!'   # if you want to use it, please change the less security setting in google account
 
 mail = Mail(app)
 
