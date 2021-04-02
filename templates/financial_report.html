@@ -21,9 +21,10 @@
               <thead>
                   <tr>
                       <th scope="col"></th>
-                      {% for row in membership_payments %}
-                      <th scope="col">{{ row[0] }} </th>
+                      {% for row in total_payments %}
+                      <th scope="col" class="text-end">{{ row[2] }} {{ row[0] }} </th>
                       {% endfor %}
+                      <th scope="col" class="text-end">Total</th>
                   </tr>
               </thead>
 
@@ -31,21 +32,24 @@
                 <tr>
                     <th scope="row">Membership Payments</th>
                     {% for row in membership_payments %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ membership_total_payments[0] }}</td>
                 </tr>
                 <tr>
                     <th scope="row">PT Payments</th>
                     {% for row in pt_payments %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ pt_total_payments[0] }}</td>
                 </tr>
 
                 <tr>
                     <th scope="row">Total</th>
                     {% for row in total_payments %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ grand_total_payments[0] }}</td>
                 </tr>
 
 

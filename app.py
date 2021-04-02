@@ -507,7 +507,7 @@ def payment_reminder():
             flash('Sorry! The reminder email to  %s unsuccessfully!' % (name_reminder,))
             return redirect(url_for('membership_list_manager' )) 
 
-@app.route("/contact_members", methods=['GET', 'POST'])   # this part is for manager to select member you want to communicate with.
+@app.route("/contact_members", methods=['GET', 'POST'])
 def contact_members():    
     cur = getCursor()
     cur.execute("SELECT user_id, first_name, last_name, email_address FROM member;")
@@ -517,58 +517,60 @@ def contact_members():
     return render_template('contact_members.html',dbresult=select_result,dbcols=column_names, \
         usertype = session['usertype'], name = session['name'])
 
-@app.route("/contact_members/email", methods=['GET', 'POST'])  # this part is for email interface to get email address and add them to email recipient box.
+
+@app.route("/contact_members/email", methods=['GET', 'POST'])
 def contact_members_email(): 
-    if request.method == 'POST':    
+    if request.method == 'POST':
+        useridlist = request.form.getlist('user_id')
+        recipientslist = request.form.getlist('recipients')
 
-       recipientslist = request.form.getlist('recipients')
-       separator = ', '
-       print(recipientslist)
-       print(type(recipientslist))
- 
-       recipients = separator.join(recipientslist)
-       print(recipients)
-       print(type(recipients))
+        recipients = []
+        for recipient in recipientslist:
+            member_email = dict(email = recipient)
+            recipients.append(member_email)
+            print(member_email)
+        print(recipients) 
+
+        session['email'] = recipients
+
+    return render_template('contact_members_email.html', recipientslist=recipientslist, \
+        usertype = session['usertype'], name = session['name'], recipients=session['email'])
         
-    return render_template('contact_members_email.html',  recipients=recipients,
-        usertype = session['usertype'], name = session['name'])
-
-@app.route("/contact_members/send_email", methods=['GET','POST'])  # this part is for manager to send email to which you want.
+@app.route("/contact_members/send_email", methods=['GET','POST'])
 def contact_members_send_email(): 
     if request.method == 'POST':
-        
         sent = dt.datetime.now()
         email_subject = request.form.get('subject')
         email_message = request.form.get('message')
         sender = request.form.get('sender')
-        recipients = request.form.getlist('recipients')
+        recipients = session['email']
+        print(recipients)
+        print(type(recipients))
         
         print(sent)
         print(email_subject)
         print(sender)
         print(email_message)
-        print(recipients)
-        print(type(recipients))
 
         with mail.connect() as conn:
             for recipient in recipients:
                 message = Message (
+                    recipients=[recipient['email']],
                     subject=email_subject,
                     sender='esangkop@gmail.com', 
-                    recipients=[recipient],
                     body=email_message
                     ) 
+                time.sleep(2)
                 conn.send(message)
 
-                cur = getCursor()
-                cur.execute("INSERT INTO communication(sent, sender, subject, message) \
+        flash ('Email successfully sent!')
+
+        cur = getCursor()
+        cur.execute("INSERT INTO communication(sent, sender, subject, message) \
                     VALUES (%s,%s,%s,%s);",(sent,sender,email_subject,email_message,))
-
-
-                flash ('Email was successfully sent!')
                
-                return render_template('contact_members_email.html', 
-                usertype = session['usertype'], name = session['name'])
+        return render_template('contact_members_email.html', \
+        usertype = session['usertype'], name = session['name'], recipients=session['email'])
 
 
 """ The fifth part is for manager, you can manage trainer information. """
@@ -1333,7 +1335,7 @@ def delete_search():
         else:
             return redirect(url_for('delete_class_interface' ))
 
-@app.route("/groupclass_report_generator", methods = ['GET','POST'])   #this part is the groupclass_report_generator interface.
+@app.route("/groupclass_report_generator", methods = ['GET','POST']) 
 def groupclass_report_generator():
     return render_template('groupclass_report_generator.html', usertype = session['usertype'], name = session['name'])
 
@@ -1344,47 +1346,71 @@ def groupclass_report():
         end_date = request.form.get('end_date')
 
         cur = getCursor()
-        cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
+        cur.execute("SELECT CAST(class_year AS INT), class_month, class_month_name, sum(count)\
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'BOX FIT' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') ;" ,(start_date,end_date),)
+            AND group_class_name = 'BOX FIT' GROUP BY 1,2,3 ORDER BY 1 DESC, 2 DESC;" ,(start_date,end_date),)
         boxfit_attendance = cur.fetchall()
 
-        cur = getCursor()
-        cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
-            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'Body Combat' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');",(start_date,end_date),)
+        cur.execute("SELECT sum(count) FROM group_class_attendance WHERE group_class_date \
+            BETWEEN %s AND %s AND group_class_name = 'BOX FIT';",(start_date,end_date),)
+        boxfit_total_attendance = cur.fetchone()
+
+        cur.execute("SELECT class_year, class_month, class_month_name, sum(count)\
+            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s AND group_class_name = 'Body Combat' \
+            GROUP BY 1,2,3 ORDER BY 1 DESC, 2 DESC;",(start_date,end_date),)
         bodycombat_attendance = cur.fetchall()
 
-        cur = getCursor()
-        cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
+        cur.execute("SELECT sum(count) FROM group_class_attendance WHERE group_class_date \
+            BETWEEN %s AND %s AND group_class_name = 'Body Combat';",(start_date,end_date),)
+        bodycombat_total_attendance = cur.fetchone()
+
+        cur.execute("SELECT class_year, class_month, class_month_name, sum(count) \
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name ='Grit Cardio' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');",(start_date,end_date),)
+            AND group_class_name = 'Grit Cardio' GROUP BY 1,2,3 ORDER BY 1 DESC, 2 DESC;",(start_date,end_date),)
         gritcardio_attendance = cur.fetchall()
 
-        cur = getCursor()
-        cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
+        cur.execute("SELECT sum(count) FROM group_class_attendance WHERE group_class_date \
+            BETWEEN %s AND %s AND group_class_name = 'Grit Cardio';",(start_date,end_date),)
+        gritcardio_total_attendance = cur.fetchone()
+
+
+        cur.execute("SELECT class_year, class_month, class_month_name, sum(count) \
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'Sprint'  GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');" ,(start_date,end_date),)
+            AND group_class_name = 'Sprint' GROUP BY 1,2,3 ORDER BY 1 DESC, 2 DESC;" ,(start_date,end_date),)
         sprint_attendance = cur.fetchall()
 
-        cur = getCursor()
-        cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
-            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'Yoga' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');",(start_date,end_date),)
+        cur.execute("SELECT sum(count) FROM group_class_attendance WHERE group_class_date \
+            BETWEEN %s AND %s AND group_class_name = 'Sprint';",(start_date,end_date),)
+        sprint_total_attendance = cur.fetchone()
+
+        cur.execute("SELECT class_year, class_month, class_month_name, sum(count) \
+            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s  \
+            AND group_class_name = 'Yoga' GROUP BY 1,2,3 ORDER BY 1 DESC, 2 DESC;",(start_date,end_date),)
         yoga_attendance = cur.fetchall()
 
-        cur = getCursor()
-        cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
-            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s  GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');" \
-            ,(start_date,end_date),)
+        cur.execute("SELECT sum(count) FROM group_class_attendance WHERE group_class_date \
+            BETWEEN %s AND %s AND group_class_name = 'Yoga';",(start_date,end_date),)
+        yoga_total_attendance = cur.fetchone()
+
+        cur.execute("SELECT class_year, class_month, class_month_name, sum(count) \
+            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
+            GROUP BY 1,2,3 ORDER BY 1 DESC, 2 DESC;",(start_date,end_date),)
         total_attendance = cur.fetchall()
+
+        cur.execute("SELECT sum(count) FROM group_class_attendance WHERE group_class_date \
+            BETWEEN %s AND %s;",(start_date,end_date),)
+        grand_total_attendance = cur.fetchone()
 
         print(start_date)
         print(end_date)
-    return render_template('groupclass_report.html', usertype = session['usertype'], \
-        name = session['name'], boxfit_attendance=boxfit_attendance, bodycombat_attendance=bodycombat_attendance, \
-        gritcardio_attendance=gritcardio_attendance, sprint_attendance=sprint_attendance, yoga_attendance=yoga_attendance, \
-        total_attendance=total_attendance, start_date=start_date,end_date=end_date)
+    return render_template('groupclass_report.html', usertype = session['usertype'],name = session['name'], \
+        boxfit_attendance=boxfit_attendance, boxfit_total_attendance=boxfit_total_attendance, \
+        bodycombat_attendance=bodycombat_attendance, bodycombat_total_attendance=bodycombat_total_attendance, \
+        gritcardio_attendance=gritcardio_attendance, gritcardio_total_attendance=gritcardio_total_attendance,\
+        sprint_attendance=sprint_attendance, sprint_total_attendance=sprint_total_attendance, \
+        yoga_attendance=yoga_attendance, yoga_total_attendance=yoga_total_attendance, \
+        total_attendance=total_attendance, grand_total_attendance=grand_total_attendance, \
+        start_date=start_date,end_date=end_date)
 
 
 
@@ -1496,39 +1522,52 @@ def attendance_pt():
 """ The eighth part is for manager, you can watch your gym financial information. """
 
 
-@app.route("/financial_report_generator", methods = ['GET','POST'])  #this part is the financial_report_generator interface.
+@app.route("/financial_report_generator", methods = ['GET','POST']) 
 def financial_report_generator():
     return render_template('financial_report_generator.html', usertype = session['usertype'], name = session['name'])
 
-@app.route("/financial_report", methods = ['GET','POST'])   #this part is  for generating financial report attendacne table.
+
+@app.route("/financial_report", methods = ['GET','POST']) 
 def financial_report():
     if request.method == 'POST':
         start_date = request.form.get('start_date')
         end_date = request.form.get('end_date')
 
         cur = getCursor()
-        cur.execute("SELECT to_char(payment_date, 'Mon') as month, sum(paid_amount) \
-        from membership_payments WHERE payment_date BETWEEN %s AND %s group by month;" \
+        cur.execute("SELECT CAST(payment_year AS INT), payment_month_number, payment_month_name, to_char(sum(paid_amount), 'L999G999D99') \
+            FROM membership_payments WHERE payment_date BETWEEN %s AND %s GROUP BY 1,2,3 ORDER BY 1 DESC,2 DESC;" \
             ,(start_date,end_date),)
         membership_payments = cur.fetchall()
 
-        cur = getCursor()
-        cur.execute("SELECT to_char(payment_date, 'Mon') as month, sum(paid_amount) \
-        from pt_payments WHERE payment_date BETWEEN %s AND %s group by month;" \
+        cur.execute("SELECT to_char(sum(paid_amount), 'L999G999D99') FROM membership_payments WHERE payment_date BETWEEN %s AND %s;" \
+            ,(start_date,end_date),)
+        membership_total_payments = cur.fetchone()
+
+        cur.execute("SELECT CAST(payment_year AS INT), payment_month_number, payment_month_name, to_char(sum(paid_amount), 'L999G999D99') \
+            FROM pt_payments WHERE payment_date BETWEEN %s AND %s GROUP BY 1,2,3 ORDER BY 1 DESC,2 DESC;" \
             ,(start_date,end_date),)
         pt_payments = cur.fetchall()
 
-        cur = getCursor()
-        cur.execute("SELECT to_char(payment_date, 'Mon') as month, sum(paid_amount) \
-        from total_payments WHERE payment_date BETWEEN %s AND %s group by month;" \
+        cur.execute("SELECT to_char(sum(paid_amount), 'L999G999D99') FROM pt_payments WHERE payment_date BETWEEN %s AND %s;" \
+            ,(start_date,end_date),)
+        pt_total_payments = cur.fetchone()
+
+        cur.execute("SELECT CAST(payment_year AS INT), payment_month_number, payment_month_name, to_char(sum(paid_amount), 'L999G999D99') \
+            FROM total_payments WHERE payment_date BETWEEN %s AND %s GROUP BY 1,2,3 ORDER BY 1 DESC,2 DESC;" \
             ,(start_date,end_date),)
         total_payments = cur.fetchall()
 
+        cur.execute("SELECT to_char(sum(paid_amount), 'L999G999D99') FROM total_payments WHERE payment_date BETWEEN %s AND %s;" \
+            ,(start_date,end_date),)
+        grand_total_payments = cur.fetchone()
+
         print(start_date)
         print(end_date)
-    return render_template('financial_report.html', usertype = session['usertype'], \
-        name = session['name'], membership_payments=membership_payments, pt_payments=pt_payments, \
-        total_payments=total_payments, start_date=start_date,end_date=end_date)
+    return render_template('financial_report.html', usertype = session['usertype'], name = session['name'], \
+        membership_payments=membership_payments, membership_total_payments=membership_total_payments, \
+        pt_payments=pt_payments, pt_total_payments=pt_total_payments, \
+        total_payments=total_payments, grand_total_payments=grand_total_payments, \
+        start_date=start_date,end_date=end_date)
 
 
 """ The neineth part is for trainer, you can view and manage your own basic information, class information and your class attendance. """

@@ -22,8 +22,9 @@
                   <tr>
                       <th scope="col"></th>
                       {% for row in boxfit_attendance %}
-                      <th scope="col">{{ row[0] }} </th>
+                      <th scope="col" class="text-end">{{ row[2] }} {{ row[0] }}</th>
                       {% endfor %}
+                      <th scope="col" class="text-end">Total</th>
                   </tr>
               </thead>
 
@@ -32,42 +33,48 @@
                     <th scope="row">BOX FIT</th>
                     
                     {% for row in boxfit_attendance %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ boxfit_total_attendance[0] }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Body Combat</th>
                     {% for row in bodycombat_attendance %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ bodycombat_total_attendance[0] }}</td>
                 </tr>
 
                 <tr>
                     <th scope="row">Grit Cardio</th>
                     {% for row in gritcardio_attendance %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ gritcardio_total_attendance[0] }}</td>
                 </tr>
 
                 <tr>
                     <th scope="row">Sprint</th>
                     {% for row in sprint_attendance %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ sprint_total_attendance[0] }}</td>
                 </tr>
 
                 <tr>
                     <th scope="row">Yoga</th>
                     {% for row in yoga_attendance %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ yoga_total_attendance[0] }}</td>
                 </tr>
 
                 <tr>
                     <th scope="row">Total</th>
                     {% for row in total_attendance %}
-                    <td>{{ row[1] }}</td>
+                    <td class="text-end">{{ row[3] }}</td>
                     {% endfor %}
+                    <td class="text-end">{{ grand_total_attendance[0] }}</td>
                 </tr>
 
 

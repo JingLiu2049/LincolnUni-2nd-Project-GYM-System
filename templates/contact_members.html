@@ -16,8 +16,6 @@
           <form action="{{url_for('contact_members_email')}}" method="POST">
 
           <h3 class="with-margin">Select Email Recipients</h3>
-        
-         
 
           <div class="text-center with-margin">
                 <button class="btn btn-dark btn-sm" type="button" onclick="selects()">Select All</button>
@@ -28,6 +26,7 @@
           <table class="table table-hover">
             <thead>
               <tr>
+                <th>User ID</th>
                 <th>Recipient</th>
                 <th>Email Address</th>
                 <th>Send</th>
@@ -40,12 +39,12 @@
           <tbody>
             {% for result in dbresult %}
             <tr>
-              
+              <td>{{ result[0] }}</td> 
               <td> {{ result[1] }} {{ result[2] }} </td>
               <td> {{ result[3] }} </td>                  
               <td>
-                <input  type="checkbox" name="recipients" \
-                id="recipients" value="{{ result[3] }}"></td>          
+                <input  type="checkbox" name="recipients" id="recipients" value="{{ result[3] }}" />
+              </td>          
             </tr>
             {% endfor %}
       

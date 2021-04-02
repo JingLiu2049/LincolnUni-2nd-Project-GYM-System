@@ -26,21 +26,24 @@
                 {% endwith %}
             </div>
 
-                <form action="{{url_for('contact_members_send_email')}}" method="POST">  
+                <form action="{{url_for('contact_members_email')}}" method="POST">  
                                                             
                     <div class="form-group row overflow-auto">
                         <label for="recipients" class="col-sm-2 col-form-label with-margin">Recipients</label>
                         <div class="col-sm-10">                            
-                            <input type="email" readonly class="form-control with-margin " id="recipients" 
-                            name="recipients" value="{{recipients}}"/>
-                            </div>
-                    </div>
+                            <input type="email" readonly class="form-control with-margin " id="recipientslist" 
+                            name="recipientslist" value="{{recipientslist}}"/>
+                        </div>
+                    </div> 
+                </form>
+
+                <form action="{{url_for('contact_members_send_email')}}" method="POST">  
 
                     <div class="form-group row">
                         <label for="sender" class="col-sm-2 col-form-label with-margin">Sender</label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control with-margin" id="sender" 
-                            name="sender" value="esangkop@gmail.com" maxlength="60"/>
+                            name="sender" value="esangkop@gmail.com"/>
                         </div>
                     </div>
 
@@ -48,7 +51,7 @@
                         <label for="subject" class="col-sm-2 col-form-label with-margin">Subject</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control with-margin" id="subject" 
-                            name="subject" maxlength="150"/>
+                            name="subject"/>
                         </div>
                     </div>
 
