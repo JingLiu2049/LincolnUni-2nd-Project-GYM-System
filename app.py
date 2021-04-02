@@ -537,7 +537,7 @@ def contact_members_email():
 
     return render_template('contact_members_email.html', recipientslist=recipientslist, \
         usertype = session['usertype'], name = session['name'], recipients=session['email'])
-        
+
 @app.route("/contact_members/send_email", methods=['GET','POST'])
 def contact_members_send_email(): 
     if request.method == 'POST':
@@ -1641,6 +1641,7 @@ def profile_edit():
                 % (int(form['memberid']), (form['firstname']),form['lastname'],form['phone'],email,
                  form['address'], form['birthday'], form['gender'], form['goals'],form['medical'],form['photo'])
         elif usertype == 'trainer':
+            test(usertype,'ttttttttttttttttttttt')
             sql = sql = "INSERT INTO trainer values (%s,'%s','%s', '%s', '%s', '%s','%s','%s','%s','%s','%s','%s')ON CONFLICT \
                 (user_id) DO UPDATE SET first_name = EXCLUDED.first_name, last_name = EXCLUDED.last_name,\
                 phone_number = EXCLUDED.phone_number, email_address = EXCLUDED.email_address, address = \
@@ -1649,8 +1650,8 @@ def profile_edit():
                 EXCLUDED.certification, photo_url = EXCLUDED.photo_url" % (int(form['memberid']), (form['firstname']),
                 form['lastname'],form['phone'],email, form['address'], form['birthday'], form['gender'],
                 form['speciality'],form['experience'],form['certification'],form['photo'])
-
         cursor.execute(sql)
+
         if usertype =='manager' and form['edit'] == 'member':
             flash ("The member's personal information has been updated")
             return redirect(url_for('member_list'))

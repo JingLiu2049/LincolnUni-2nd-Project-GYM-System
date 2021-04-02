@@ -125,18 +125,8 @@
     </ul>
     <img src="../static/image/photosample.jpg" class="photo" alt="photo" />
     <div class="button">
-        {% if viewer %}
-            {% if viewer == 'member' %}
-            <a href= "/pt_booking?trainerid={{trainerid}}" >
-                <button type="button" class="btn btn-outline-dark submit">Book Me</button>
-            </a>
-            {% endif %}
-
-         {% else %}
-        <a href="/profile/edit">
-            <button type="button" class="btn btn-outline-dark submit">Edit Personal Information</button>
-        </a>
-        {% endif %}
+       
+    
         <a href="javascript:history.go(-1);">
             <button type="button" class="btn btn-outline-dark submit">Cancel</button>
         </a>
