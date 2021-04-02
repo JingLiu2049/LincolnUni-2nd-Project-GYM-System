@@ -28,7 +28,7 @@ div.button{
 }
 div.notice{
     font-size: 1.5em;
-    color: #ffce46;
+    color: red;
 }
 div.attendance{
     background:rgba(0, 0, 0, 0.15);
