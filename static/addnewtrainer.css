@@ -54,8 +54,7 @@ div.button{
 
 div.controldiv{
     margin-top:3rem;
-    margin-right:auto;
-    margin-left:auto;
+    margin-left:10rem;
     width:30%;
 }
 div.insertmodule >.insertbox{
