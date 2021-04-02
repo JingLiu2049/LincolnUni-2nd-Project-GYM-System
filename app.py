@@ -1337,7 +1337,7 @@ def delete_search():
 def groupclass_report_generator():
     return render_template('groupclass_report_generator.html', usertype = session['usertype'], name = session['name'])
 
-@app.route("/groupclass_report", methods = ['GET','POST'])     #this part is  for generating group class attendacne table.
+@app.route("/groupclass_report", methods = ['GET','POST']) 
 def groupclass_report():
     if request.method == 'POST':
         start_date = request.form.get('start_date')
@@ -1385,6 +1385,7 @@ def groupclass_report():
         name = session['name'], boxfit_attendance=boxfit_attendance, bodycombat_attendance=bodycombat_attendance, \
         gritcardio_attendance=gritcardio_attendance, sprint_attendance=sprint_attendance, yoga_attendance=yoga_attendance, \
         total_attendance=total_attendance, start_date=start_date,end_date=end_date)
+
 
 
 """ The seventh part is for manager, you can manage Personal training information. """
