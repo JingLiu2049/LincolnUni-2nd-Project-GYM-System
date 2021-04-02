@@ -1346,36 +1346,36 @@ def groupclass_report():
         cur = getCursor()
         cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'BOX FIT' GROUP BY class_month;" ,(start_date,end_date),)
+            AND group_class_name = 'BOX FIT' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') ;" ,(start_date,end_date),)
         boxfit_attendance = cur.fetchall()
 
         cur = getCursor()
         cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'Body Combat' GROUP BY class_month;",(start_date,end_date),)
+            AND group_class_name = 'Body Combat' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');",(start_date,end_date),)
         bodycombat_attendance = cur.fetchall()
 
         cur = getCursor()
         cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name ='Grit Cardio' GROUP BY class_month;",(start_date,end_date),)
+            AND group_class_name ='Grit Cardio' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');",(start_date,end_date),)
         gritcardio_attendance = cur.fetchall()
 
         cur = getCursor()
         cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'Sprint'  GROUP BY class_month;" ,(start_date,end_date),)
+            AND group_class_name = 'Sprint'  GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');" ,(start_date,end_date),)
         sprint_attendance = cur.fetchall()
 
         cur = getCursor()
         cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
             FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s \
-            AND group_class_name = 'Yoga' GROUP BY class_month;",(start_date,end_date),)
+            AND group_class_name = 'Yoga' GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');",(start_date,end_date),)
         yoga_attendance = cur.fetchall()
 
         cur = getCursor()
         cur.execute("SELECT to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon') AS class_month, sum(count)\
-            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s  GROUP BY class_month;" \
+            FROM group_class_attendance WHERE group_class_date BETWEEN %s AND %s  GROUP BY to_char(to_date (group_class_date,'yyyy-mm-dd'),'Mon');" \
             ,(start_date,end_date),)
         total_attendance = cur.fetchall()
 
