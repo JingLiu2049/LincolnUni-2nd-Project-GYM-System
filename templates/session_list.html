@@ -63,8 +63,8 @@ Personal Training Sessions
         <button type="button" name="group" class="btn btn-outline-dark">
             Edit
         </button></a></td>
-    <td><a href="/session_list?delete_id={{item[0]}}" >
-        <button type="button" name="group" class="btn btn-outline-dark">
+    <td class="delete"><a href="" >
+        <button type="button" name="group" class="btn btn-outline-dark" value="{{item[0]}}">
             Delete
         </button></a></td>
 </tr>
@@ -102,6 +102,19 @@ Personal Training Sessions
     inserts(days, select_day)
     onchange_hidden(select_name,names)
     onchange_hidden(select_day, days)
+
+    
+    var btns = document.querySelectorAll("td.delete button");
+    for(var i = 0; i<btns.length;i++){
+        btns[i].onclick = function(){
+            if(confirm("Delete this Trainer Class?")){
+                id = "session_list?delete_id="+this.value
+                this.parentElement.href = id
+            }
+            
+        }
+    }
+
 
 
 </script>

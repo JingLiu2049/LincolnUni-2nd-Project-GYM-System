@@ -87,7 +87,10 @@ Personal Training Attendance
     select_month.onchange = function(){
         document.getElementById('period_form').submit()
     }
-    var selected = '{{selected}}';
+    var selected = '{{period_attend|tojson}}';
+    var obj = JSON.parse(selected);
+    test(obj);
+    test(selected);
     var options = document.querySelectorAll("#select_month option");
     if(selected != 'False'){
         test(selected)
